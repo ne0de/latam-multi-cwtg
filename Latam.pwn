@@ -1,5 +1,7 @@
 /*
-	Multi CW/TG by Andrew Manu / ne0de
+	Latam Community - Comunidad Latino Am√©rica.
+	Multi Clan War's and Training gamemode for running weapons players.
+	Copyright (C) 2020 - Andrew_Manu / ne0de
 */
 
 #include <a_samp>
@@ -8,7 +10,7 @@
 #include <streamer>
 #include <strlib>
 
-/* DOX ConexiÛn */
+/* DOX Conexi√≥n */
 #define HTTP_IP_API_URL		"ip-api.com/csv"
 #define HTTP_IP_API_END     "?fields=country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,reverse,query,status,message"
 #define HTTP_VPN_API_URL    "check.getipintel.net/check.php?contact=tuemail@gmail.com&ip="
@@ -150,7 +152,7 @@ new bool:dueloMapaEstado[4] = {false, true, true, true};
 new interiorDueloMapa[4] = {-1, 1, 16, 1};
 
 new nombreDueloMapas[][] = {"Ninguno", "Warehouse", "Kurks", "Estadio"};
-new nombreDueloArmas[][] = {"Ninguno", "Armas R·pidas", "Armas Lentas"};
+new nombreDueloArmas[][] = {"Ninguno", "Armas R√°pidas", "Armas Lentas"};
 
 
 /* Colores */
@@ -272,7 +274,7 @@ enum DataP
 
 new configuracionMundo[5][DataP];
 new Equipo[MAX_PLAYERS];
-/* Textdraws InformaciÛn */
+/* Textdraws Informaci√≥n */
 new Text:datosPartida[5];
 
 new nombreArmas[][] = {"Escopeta Recortada", "Desert Eagle", "Armas Rapidas", "Armas Lentas"};
@@ -607,7 +609,7 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 		    return SendClientMessage(playerid, COLOR_ROJO, "> Termina de configurar el duelo.");
 		    
 		if(Jugador[clickedplayerid][eligiendoMundo])
-		    return SendClientMessage(playerid, COLOR_ROJO, "> Este jugador est· eligiendo un mundo.");
+		    return SendClientMessage(playerid, COLOR_ROJO, "> Este jugador est√° eligiendo un mundo.");
 
 		if(Jugador[playerid][mostrarTab])
             return mostrarConexion(playerid, clickedplayerid);
@@ -865,7 +867,7 @@ public OnGameModeInit()
 {
 	SetGameModeText("Multi CW/TG");
 	SendRconCommand("mapname SF/LV");
- 	SendRconCommand("language EspaÒol/Spanish");
+ 	SendRconCommand("language Espa√±ol/Spanish");
     SendRconCommand("weather 4");
     
 	EnableStuntBonusForAll(1);
@@ -937,7 +939,7 @@ public OnRconLoginAttempt(ip[], password[], success)
             if(!strcmp(ip, pip, true)) 
             {
      			new Texto[400];
-				format(Texto, sizeof(Texto), "> {FFFFFF}%s {C9C9C9}intentÛ poner la RCON pero fallÛ.", obtenerNick(i));
+				format(Texto, sizeof(Texto), "> {FFFFFF}%s {C9C9C9}intent√≥ poner la RCON pero fall√≥.", obtenerNick(i));
 		    	SendClientMessageToAll(COLOR_NEUTRO, Texto);
                 Kick(i);
             }
@@ -971,7 +973,7 @@ public registrarDatos(playerid)
     format(str, sizeof(str), "12,");     								strcat(Consulta, str); //hora
     format(str, sizeof(str), "%d,", diaActual);     					strcat(Consulta, str); //dia
     format(str, sizeof(str), "%d,", mesActual);     					strcat(Consulta, str); //mes
-    format(str, sizeof(str), "%d,", yearActual);     					strcat(Consulta, str); //aùo
+    format(str, sizeof(str), "%d,", yearActual);     					strcat(Consulta, str); //a¬ùo
     format(str, sizeof(str), "0,");     								strcat(Consulta, str); //puntajeEquipo
 	format(str, sizeof(str), "0,");     								strcat(Consulta, str); //puntajeSolo
     format(str, sizeof(str), "0,");     								strcat(Consulta, str); //dganados
@@ -1123,12 +1125,12 @@ public OnPlayerConnect(playerid)
 	new Dialogo[200];
 	if(cuentaRegistrada(playerid)){
  		cargarPassword(playerid);
-  		format(Dialogo, sizeof(Dialogo),"{C9C9C9}Escribe tu contraseÒa para ingresar al servidor.\n\
-		{C9C9C9}El servidor garantiza la confidencialidad y protecciÛn de tus datos.");
+  		format(Dialogo, sizeof(Dialogo),"{C9C9C9}Escribe tu contrase√±a para ingresar al servidor.\n\
+		{C9C9C9}El servidor garantiza la confidencialidad y protecci√≥n de tus datos.");
    		ShowPlayerDialog(playerid, D_LOGIN, DIALOG_STYLE_PASSWORD, "{7C7C7C}Login", Dialogo, ">>", "X");
 	}else{
 		format(Dialogo, sizeof(Dialogo),"{C9C9C9}Registra tu cuenta para ingresar al servidor.\n\
-		{C9C9C9}El servidor garantiza la confidencialidad y protecciÛn de tus datos.");
+		{C9C9C9}El servidor garantiza la confidencialidad y protecci√≥n de tus datos.");
   		ShowPlayerDialog(playerid, D_REGISTRO, DIALOG_STYLE_PASSWORD, "{7C7C7C}Registro", Dialogo, ">>", "X");
 	}
 
@@ -1183,8 +1185,8 @@ public OnPlayerDisconnect(playerid, reason)
 	eliminarDrawFpsPing(playerid);
 	actualizarJugadores(GetPlayerVirtualWorld(playerid), Equipo[playerid]);
 	
-	new Mensaje[180], razonesDesconexion[3][] = {"Crash/Timeout", "SaliÛ", "Kick/Ban"};
-	format(Mensaje, sizeof(Mensaje), "{%06x}%s {C9C9C9}se desconectÛ ({7C7C7C}%s{C9C9C9}).", colorJugador(playerid), obtenerNick(playerid), razonesDesconexion[reason]);
+	new Mensaje[180], razonesDesconexion[3][] = {"Crash/Timeout", "Sali√≥", "Kick/Ban"};
+	format(Mensaje, sizeof(Mensaje), "{%06x}%s {C9C9C9}se desconect√≥ ({7C7C7C}%s{C9C9C9}).", colorJugador(playerid), obtenerNick(playerid), razonesDesconexion[reason]);
 	SendClientMessageToAll(COLOR_NEUTRO, Mensaje);
 	
 	CallLocalFunction("guardarDatos", "i", playerid);
@@ -1270,19 +1272,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return Kick(playerid);
 
  			if(strlen(inputtext) < 4 || strlen(inputtext) > 20){
-               	SendClientMessage(playerid, COLOR_ROJO, "La contraseÒa debe tener de 4 a 20 letras.");
-        		return ShowPlayerDialog(playerid, D_REGISTRO, DIALOG_STYLE_PASSWORD, "{7C7C7C}Error de registro", "{FFBB00}La contraseÒa que introduciste es erronea.\n", ">>", "X");
+               	SendClientMessage(playerid, COLOR_ROJO, "La contrase√±a debe tener de 4 a 20 letras.");
+        		return ShowPlayerDialog(playerid, D_REGISTRO, DIALOG_STYLE_PASSWORD, "{7C7C7C}Error de registro", "{FFBB00}La contrase√±a que introduciste es erronea.\n", ">>", "X");
 			}
 
 			if(existePassword(inputtext)){
-               	SendClientMessage(playerid, COLOR_ROJO, "La contraseÒa ya existe en otra cuenta, por temas de seguridad introduce otra.");
-        		return ShowPlayerDialog(playerid, D_REGISTRO, DIALOG_STYLE_PASSWORD, "{7C7C7C}Error de registro", "{FFBB00}La contraseÒa que introduciste es erronea.\n", ">>", "X");
+               	SendClientMessage(playerid, COLOR_ROJO, "La contrase√±a ya existe en otra cuenta, por temas de seguridad introduce otra.");
+        		return ShowPlayerDialog(playerid, D_REGISTRO, DIALOG_STYLE_PASSWORD, "{7C7C7C}Error de registro", "{FFBB00}La contrase√±a que introduciste es erronea.\n", ">>", "X");
 			}
 
 			format(Jugador[playerid][Password], 24, inputtext);
 			CallLocalFunction("registrarDatos", "i", playerid);
 			SendClientMessage(playerid, COLOR_NEUTRO, "Te has registrado correctamente, bienvenido al servidor.");
-			SendClientMessage(playerid, COLOR_NEUTRO, "Los comandos del servidor lo puedes ver ac· /{FFFFFF}comandos{C9C9C9}.");
+			SendClientMessage(playerid, COLOR_NEUTRO, "Los comandos del servidor lo puedes ver ac√° /{FFFFFF}comandos{C9C9C9}.");
 			mostrarMenuMundos(playerid);
 
         }
@@ -1293,7 +1295,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return Kick(playerid);
 
             if(isnull(inputtext) || !strcmp(inputtext, "0"))
-				return ShowPlayerDialog(playerid, D_LOGIN, DIALOG_STYLE_PASSWORD, "{7C7C7C}Error de logeo", "{FFBB00}La contraseÒa que introduciste es erronea.", ">>", "X");
+				return ShowPlayerDialog(playerid, D_LOGIN, DIALOG_STYLE_PASSWORD, "{7C7C7C}Error de logeo", "{FFBB00}La contrase√±a que introduciste es erronea.", ">>", "X");
 
 		    if(!strcmp(Jugador[playerid][Password], inputtext, true, 24)){
 				new Texto[256];
@@ -1303,7 +1305,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				CallLocalFunction("guardarIp", "i", playerid);
 				mostrarMenuMundos(playerid);
 			}else
-				return ShowPlayerDialog(playerid, D_LOGIN, DIALOG_STYLE_PASSWORD, "{7C7C7C}Error de logeo", "{FFBB00}La contraseÒa que introduciste es erronea.", ">>", "X");
+				return ShowPlayerDialog(playerid, D_LOGIN, DIALOG_STYLE_PASSWORD, "{7C7C7C}Error de logeo", "{FFBB00}La contrase√±a que introduciste es erronea.", ">>", "X");
 		}
 
 		case D_MENU_MUNDOS:
@@ -1452,14 +1454,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
         	if(response){
         	    if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionSkin(playerid);
         	    }
 
         	    new id = strval(inputtext);
 
         	    if(id > 311 || id < 0){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> No existe ese n˙mero de Skin.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> No existe ese n√∫mero de Skin.");
 					return mostrarMenuConfiguracionSkin(playerid);
 				}
 				
@@ -1479,7 +1481,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
         	if(response){
         	    if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionHora(playerid);
         	    }
 
@@ -1506,7 +1508,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
         	if(response){
         	    if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionHora(playerid);
         	    }
 
@@ -1624,10 +1626,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new Texto[200];
 						if(configuracionMundo[GetPlayerVirtualWorld(playerid)][Restriccion] == 1){
 							configuracionMundo[GetPlayerVirtualWorld(playerid)][Restriccion] = 0;
-							format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}desactivÛ la restricciÛn de conexiÛn.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
+							format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}desactiv√≥ la restricci√≥n de conexi√≥n.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
 						}else{
 							configuracionMundo[GetPlayerVirtualWorld(playerid)][Restriccion] = 1;
-							format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}activo la restricciÛn de conexiÛn.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
+							format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}activo la restricci√≥n de conexi√≥n.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
 						}
 						enviarATodos(GetPlayerVirtualWorld(playerid), Texto);
 						return mostrarMenuConfiguracionPartida(playerid);
@@ -1637,10 +1639,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new Texto[200];
 						if(configuracionMundo[GetPlayerVirtualWorld(playerid)][equiposBloqueados]){
 							configuracionMundo[GetPlayerVirtualWorld(playerid)][equiposBloqueados] = false;
-							format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}desbloqueÛ los Equipos.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
+							format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}desbloque√≥ los Equipos.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
 						}else{
 							configuracionMundo[GetPlayerVirtualWorld(playerid)][equiposBloqueados] = true;
-							format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}bloqueÛ los equipos.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
+							format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}bloque√≥ los equipos.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
 						}
 						enviarATodos(GetPlayerVirtualWorld(playerid), Texto);
 						return mostrarMenuConfiguracionPartida(playerid);
@@ -1649,7 +1651,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    darArmadura(GetPlayerVirtualWorld(playerid));
    						new Texto[400];
-						format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}estableciÛ la armadura completa a los jugadores.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
+						format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}estableci√≥ la armadura completa a los jugadores.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
 						enviarATodos(GetPlayerVirtualWorld(playerid), Texto);
 						return mostrarMenuConfiguracionPartida(playerid);
 					}
@@ -1657,7 +1659,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    respawnearJugadores(GetPlayerVirtualWorld(playerid));
    						new Texto[400];
-						format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}respawneù a los jugadores.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
+						format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}respawne¬ù a los jugadores.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), obtenerNick(playerid));
 						enviarATodos(GetPlayerVirtualWorld(playerid), Texto);
 						return mostrarMenuConfiguracionPartida(playerid);
 					}
@@ -1708,7 +1710,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
   			new numeroMundo = GetPlayerVirtualWorld(playerid);
         	if(response){
 				if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionRM(playerid);
 				}
         	    new id = strval(inputtext);
@@ -1717,12 +1719,12 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 					return mostrarMenuConfiguracionRM(playerid);
 				}
 				if(id == configuracionMundo[numeroMundo][rondaMaxima]){
-					SendClientMessage(playerid, COLOR_AMARILLO, "> Ya estù puesto esa cantidad actualmente.");
+					SendClientMessage(playerid, COLOR_AMARILLO, "> Ya est¬ù puesto esa cantidad actualmente.");
 					return mostrarMenuConfiguracionRM(playerid);
 				}
 
         		new Texto[300];
-				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ la ronda m·xima a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
+				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ la ronda m√°xima a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
 				enviarATodos(numeroMundo, Texto);
                 configuracionMundo[numeroMundo][rondaMaxima] = id;
 				return mostrarMenuConfiguracionPartida(playerid);
@@ -1735,7 +1737,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
   			new numeroMundo = GetPlayerVirtualWorld(playerid);
         	if(response){
 				if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionPM(playerid);
 				}
         	    new id = strval(inputtext);
@@ -1744,12 +1746,12 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 					return mostrarMenuConfiguracionPM(playerid);
 				}
 				if(id == configuracionMundo[numeroMundo][puntajeMaximo]){
-					SendClientMessage(playerid, COLOR_AMARILLO, "> Ya estù puesto esa cantidad actualmente.");
+					SendClientMessage(playerid, COLOR_AMARILLO, "> Ya est¬ù puesto esa cantidad actualmente.");
 					return mostrarMenuConfiguracionPM(playerid);
 				}
 
         		new Texto[300];
-				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ el puntaje m·ximo a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
+				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ el puntaje m√°ximo a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
 				enviarATodos(numeroMundo, Texto);
                 configuracionMundo[numeroMundo][puntajeMaximo] = id;
 				return mostrarMenuConfiguracionPartida(playerid);
@@ -1762,16 +1764,16 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
   			new numeroMundo = GetPlayerVirtualWorld(playerid);
         	if(response){
 				if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionPM(playerid);
 				}
         	    new id = strval(inputtext);
         	    if(id >= configuracionMundo[numeroMundo][puntajeMaximo]){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> El puntaje no tiene que ser igual o mayor al puntaje m·ximo.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> El puntaje no tiene que ser igual o mayor al puntaje m√°ximo.");
 					return mostrarMenuConfiguracionPartida(playerid);
 				}
 				if(id < 0){
-					SendClientMessage(playerid, COLOR_AMARILLO, "> El n˙mero no puede ser negativo.");
+					SendClientMessage(playerid, COLOR_AMARILLO, "> El n√∫mero no puede ser negativo.");
 					return mostrarMenuConfiguracionPR(playerid);
 				}
 				if(id == configuracionMundo[numeroMundo][puntajeNaranja]){
@@ -1780,7 +1782,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 				}
 
         		new Texto[300];
-				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ el puntaje del equipo {F69521}naranja {C9C9C9}a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
+				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ el puntaje del equipo {F69521}naranja {C9C9C9}a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
 				enviarATodos(numeroMundo, Texto);
                 configuracionMundo[numeroMundo][puntajeNaranja] = id;
 				return mostrarMenuConfiguracionPartida(playerid);
@@ -1793,16 +1795,16 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
   			new numeroMundo = GetPlayerVirtualWorld(playerid);
         	if(response){
 				if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionRR(playerid);
 				}
         	    new id = strval(inputtext);
         	    if(id >= configuracionMundo[numeroMundo][rondaMaxima]){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> La ronda no tiene que ser igual o mayor a la ronda m·xima.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> La ronda no tiene que ser igual o mayor a la ronda m√°xima.");
 					return mostrarMenuConfiguracionRR(playerid);
 				}
 				if(id < 0){
-					SendClientMessage(playerid, COLOR_AMARILLO, "> El n˙mero no puede ser negativo.");
+					SendClientMessage(playerid, COLOR_AMARILLO, "> El n√∫mero no puede ser negativo.");
 					return mostrarMenuConfiguracionRR(playerid);
 				}
 				if(id == configuracionMundo[numeroMundo][rondasNaranja]){
@@ -1811,7 +1813,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 				}
 
         		new Texto[300];
-				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ las rondas del equipo {F69521}naranja {C9C9C9}a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
+				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ las rondas del equipo {F69521}naranja {C9C9C9}a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
 				enviarATodos(numeroMundo, Texto);
                 configuracionMundo[numeroMundo][rondasNaranja] = id;
 				return mostrarMenuConfiguracionPartida(playerid);
@@ -1824,16 +1826,16 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
   			new numeroMundo = GetPlayerVirtualWorld(playerid);
         	if(response){
 				if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionPA(playerid);
 				}
         	    new id = strval(inputtext);
         	    if(id >= configuracionMundo[numeroMundo][puntajeMaximo]){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> El puntaje no tiene que ser igual o mayor al puntaje m·ximo.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> El puntaje no tiene que ser igual o mayor al puntaje m√°ximo.");
 					return mostrarMenuConfiguracionPA(playerid);
 				}
 				if(id < 0){
-					SendClientMessage(playerid, COLOR_AMARILLO, "> El n˙mero no puede ser negativo.");
+					SendClientMessage(playerid, COLOR_AMARILLO, "> El n√∫mero no puede ser negativo.");
 					return mostrarMenuConfiguracionPA(playerid);
 				}
 				if(id == configuracionMundo[numeroMundo][puntajeVerde]){
@@ -1842,7 +1844,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 				}
 
         		new Texto[300];
-				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ el puntaje del equipo {007C0E}verde {C9C9C9}a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
+				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ el puntaje del equipo {007C0E}verde {C9C9C9}a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
 				enviarATodos(numeroMundo, Texto);
                 configuracionMundo[numeroMundo][puntajeVerde] = id;
 				return mostrarMenuConfiguracionPartida(playerid);
@@ -1855,16 +1857,16 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
   			new numeroMundo = GetPlayerVirtualWorld(playerid);
         	if(response){
 				if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionRA(playerid);
 				}
         	    new id = strval(inputtext);
         	    if(id >= configuracionMundo[numeroMundo][rondaMaxima]){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> La ronda no tiene que ser igual o mayor a la ronda m·xima.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> La ronda no tiene que ser igual o mayor a la ronda m√°xima.");
 					return mostrarMenuConfiguracionRA(playerid);
 				}
 				if(id < 0){
-					SendClientMessage(playerid, COLOR_AMARILLO, "> El n˙mero no puede ser negativo.");
+					SendClientMessage(playerid, COLOR_AMARILLO, "> El n√∫mero no puede ser negativo.");
 					return mostrarMenuConfiguracionRA(playerid);
 				}
 				if(id == configuracionMundo[numeroMundo][rondasVerde]){
@@ -1873,7 +1875,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 				}
 
         		new Texto[300];
-				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ las rondas del equipo {007C0E}verde {C9C9C9}a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
+				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ las rondas del equipo {007C0E}verde {C9C9C9}a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
 				enviarATodos(numeroMundo, Texto);
                 configuracionMundo[numeroMundo][rondasVerde] = id;
 				return mostrarMenuConfiguracionPartida(playerid);
@@ -1886,7 +1888,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
   			new numeroMundo = GetPlayerVirtualWorld(playerid);
         	if(response){
 				if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionFPS(playerid);
 				}
         	    new id = strval(inputtext);
@@ -1895,7 +1897,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 					return mostrarMenuConfiguracionFPS(playerid);
 				}
 				if(id < 0){
-					SendClientMessage(playerid, COLOR_AMARILLO, "> El n˙mero no puede ser negativo.");
+					SendClientMessage(playerid, COLOR_AMARILLO, "> El n√∫mero no puede ser negativo.");
 					return mostrarMenuConfiguracionFPS(playerid);
 				}
 				if(id == configuracionMundo[numeroMundo][fpsMinimo]){
@@ -1904,7 +1906,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 				}
 
         		new Texto[400];
-				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}estableciÛ el minimo de fps a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
+				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}estableci√≥ el minimo de fps a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
 				enviarATodos(numeroMundo, Texto);
                 configuracionMundo[numeroMundo][fpsMinimo] = id;
 				return mostrarMenuConfiguracionPartida(playerid);
@@ -1917,7 +1919,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
   			new numeroMundo = GetPlayerVirtualWorld(playerid);
         	if(response){
 				if(!esNumero(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero y no un texto.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero y no un texto.");
 					return mostrarMenuConfiguracionRA(playerid);
 				}
         	    new id = strval(inputtext);
@@ -1926,7 +1928,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 					return mostrarMenuConfiguracionPING(playerid);
 				}
 				if(id < 0){
-					SendClientMessage(playerid, COLOR_AMARILLO, "> El n˙mero no puede ser negativo.");
+					SendClientMessage(playerid, COLOR_AMARILLO, "> El n√∫mero no puede ser negativo.");
 					return mostrarMenuConfiguracionPING(playerid);
 				}
 				if(id == configuracionMundo[numeroMundo][pingMaximo]){
@@ -1935,7 +1937,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 				}
 
         		new Texto[400];
-				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}estableciÛ el m·ximo de ping a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
+				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}estableci√≥ el m√°ximo de ping a {FFFFFF}%d{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
 				enviarATodos(numeroMundo, Texto);
                 configuracionMundo[numeroMundo][pingMaximo] = id;
 				return mostrarMenuConfiguracionPartida(playerid);
@@ -1948,7 +1950,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
   			new numeroMundo = GetPlayerVirtualWorld(playerid);
         	if(response){
 				if(!esFloat(inputtext)){
-            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n˙mero decimal.");
+            		SendClientMessage(playerid, COLOR_AMARILLO, "> Escribe un n√∫mero decimal.");
 					return mostrarMenuConfiguracionPP(playerid);
 				}
         	    new Float:id = floatstr(inputtext);
@@ -1957,7 +1959,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 					return mostrarMenuConfiguracionPP(playerid);
 				}
 				if(id < 0){
-					SendClientMessage(playerid, COLOR_AMARILLO, "> El n˙mero no puede ser negativo.");
+					SendClientMessage(playerid, COLOR_AMARILLO, "> El n√∫mero no puede ser negativo.");
 					return mostrarMenuConfiguracionPP(playerid);
 				}
 				if(id == configuracionMundo[numeroMundo][pingMaximo]){
@@ -1966,7 +1968,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 				}
 
         		new Texto[400];
-				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}estableciÛ el m·ximo de paquetes perdidos a {FFFFFF}%.2f{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
+				format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}estableci√≥ el m√°ximo de paquetes perdidos a {FFFFFF}%.2f{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), id);
 				enviarATodos(numeroMundo, Texto);
                 configuracionMundo[numeroMundo][plMaximo] = id;
 				return mostrarMenuConfiguracionPartida(playerid);
@@ -2011,7 +2013,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 						}
 						
 						new Texto[264];
-						format(Texto, sizeof(Texto), "[{26BF61}DUELO{C9C9C9}] Se enviÛ la peticiÛn de duelo a {%06x}%s{C9C9C9}.", colorJugador(Duelo[playerid][Oponente]), obtenerNick(Duelo[playerid][Oponente]));
+						format(Texto, sizeof(Texto), "[{26BF61}DUELO{C9C9C9}] Se envi√≥ la petici√≥n de duelo a {%06x}%s{C9C9C9}.", colorJugador(Duelo[playerid][Oponente]), obtenerNick(Duelo[playerid][Oponente]));
 						SendClientMessage(playerid, COLOR_NEUTRO, Texto);
 						Duelo[playerid][Creador] = true;
 						Duelo[playerid][Esperando] = true;
@@ -2033,7 +2035,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
                             return mostrarMenuMapasDuelo(playerid);
 						}
 						if(!dueloMapaEstado[1]){
-						    SendClientMessage(playerid, COLOR_AMARILLO, "> Este mapa ya est· ocupado.");
+						    SendClientMessage(playerid, COLOR_AMARILLO, "> Este mapa ya est√° ocupado.");
                             return mostrarMenuMapasDuelo(playerid);
 						}
 
@@ -2051,7 +2053,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 						}
 						
 						if(!dueloMapaEstado[2]){
-						    SendClientMessage(playerid, COLOR_AMARILLO, "> Este mapa ya est· ocupado.");
+						    SendClientMessage(playerid, COLOR_AMARILLO, "> Este mapa ya est√° ocupado.");
                             return mostrarMenuMapasDuelo(playerid);
 						}
 						
@@ -2070,7 +2072,7 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 						}
 						
 						if(!dueloMapaEstado[3]){
-						    SendClientMessage(playerid, COLOR_AMARILLO, "> Este mapa ya est· ocupado.");
+						    SendClientMessage(playerid, COLOR_AMARILLO, "> Este mapa ya est√° ocupado.");
                             return mostrarMenuMapasDuelo(playerid);
 						}
 						
@@ -2116,17 +2118,17 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 				}
 				
 				if(Jugador[id][eligiendoMundo]){
-				SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador est· eligiendo un mundo.");
+				SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador est√° eligiendo un mundo.");
 					return mostrarMenuOponenteDuelo(playerid);
 				}
 				
 				if(Duelo[id][Configurando]){
-				    SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador est· configurando un duelo actualmente.");
+				    SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador est√° configurando un duelo actualmente.");
 					return mostrarMenuOponenteDuelo(playerid);
 				}
 				
             	if(Duelo[id][Esperando]){
-    				SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador est· esperando un duelo actualmente.");
+    				SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador est√° esperando un duelo actualmente.");
 					return mostrarMenuOponenteDuelo(playerid);
 				}
 				
@@ -2146,12 +2148,12 @@ case D_MENU_CONFIGURACION_PARTIDA_MAPA:
 				}
 				
 				if(Equipo[id] != EQUIPO_ESPECTADOR){
-              		SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador no est· en el equipo espectador.");
+              		SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador no est√° en el equipo espectador.");
 					return mostrarMenuOponenteDuelo(playerid);
 				}
 				
 				if(tieneOponente(id)){
-              		SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador ya est· esperando un duelo.");
+              		SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador ya est√° esperando un duelo.");
 					return mostrarMenuOponenteDuelo(playerid);
 				}
 				
@@ -2202,7 +2204,7 @@ stock moverANaranja(numeroMundo, playerid){
 
 	new Texto[100];
 	format(Texto, sizeof(Texto), "\
-	[MUNDO %d] {%06x}%s {C9C9C9}se integrÛ al equipo {F69521}Naranja{C9C9C9}.", 
+	[MUNDO %d] {%06x}%s {C9C9C9}se integr√≥ al equipo {F69521}Naranja{C9C9C9}.", 
 	numeroMundo, colorJugador(playerid), obtenerNick(playerid));
 	enviarATodos(numeroMundo, Texto);
 
@@ -2223,7 +2225,7 @@ stock moverAVerde(numeroMundo, playerid){
 
 	new Texto[100];
 	format(Texto, sizeof(Texto), "\
-	[MUNDO %d] {%06x}%s {C9C9C9}se integrÛ al equipo {007C0E}Verde{C9C9C9}.", 
+	[MUNDO %d] {%06x}%s {C9C9C9}se integr√≥ al equipo {007C0E}Verde{C9C9C9}.", 
 	numeroMundo, colorJugador(playerid), obtenerNick(playerid));
 	enviarATodos(numeroMundo, Texto);
 
@@ -2244,7 +2246,7 @@ stock moverAEspectador(numeroMundo, playerid){
 
 	new Texto[100];
 	format(Texto, sizeof(Texto), "\
-	[MUNDO %d] {%06x}%s {C9C9C9}se integrÛ al equipo {FFFFFF}Espectador{C9C9C9}.", 
+	[MUNDO %d] {%06x}%s {C9C9C9}se integr√≥ al equipo {FFFFFF}Espectador{C9C9C9}.", 
 	numeroMundo, colorJugador(playerid), obtenerNick(playerid));
 	enviarATodos(numeroMundo, Texto);
 
@@ -2555,7 +2557,7 @@ stock anunciarEquipoGanadorPartida(numeroMundo, idEquipo){
 	numeroMundo, configuracionMundo[numeroMundo][puntajeTotalNaranja], configuracionMundo[numeroMundo][puntajeTotalVerde], configuracionMundo[numeroMundo][rondasNaranja], configuracionMundo[numeroMundo][rondasVerde]);
 	enviarATodos(numeroMundo, textoDatos);
 	
-	format(textoTiempo, sizeof(textoTiempo), "[MUNDO %d] La partida durÛ {FFFFFF}%d {C9C9C9}minuto/s con {FFFFFF}%d {C9C9C9}segundo/s.",
+	format(textoTiempo, sizeof(textoTiempo), "[MUNDO %d] La partida dur√≥ {FFFFFF}%d {C9C9C9}minuto/s con {FFFFFF}%d {C9C9C9}segundo/s.",
 	numeroMundo, configuracionMundo[numeroMundo][Minutos], configuracionMundo[numeroMundo][Segundos]);
     enviarATodos(numeroMundo, textoTiempo);
 	respawnearJugadores(numeroMundo);
@@ -2577,7 +2579,7 @@ stock anunciarEquipoGanadorRonda(numeroMundo, idEquipo){
 	strcat(Texto, str);
 	enviarATodos(numeroMundo, Texto);
 
-	format(textoTiempo, sizeof(textoTiempo), "[MUNDO %d] La ronda durÛ {FFFFFF}%d {C9C9C9}minuto/s con {FFFFFF}%d {C9C9C9}segundo/s.",
+	format(textoTiempo, sizeof(textoTiempo), "[MUNDO %d] La ronda dur√≥ {FFFFFF}%d {C9C9C9}minuto/s con {FFFFFF}%d {C9C9C9}segundo/s.",
 	numeroMundo, configuracionMundo[numeroMundo][Minutos], configuracionMundo[numeroMundo][Segundos]);
     enviarATodos(numeroMundo, textoTiempo);
 
@@ -2658,7 +2660,7 @@ stock sumarPuntajeJugadores(numeroMundo, equipo){
 	ForPlayers(i){
 		if(GetPlayerVirtualWorld(i) == numeroMundo && Equipo[i] == equipo){
 			Jugador[i][puntajeEquipo] += 12;
-			SendClientMessage(i, COLOR_NEUTRO, "> Se te sumÛ {FFFFFF}+12 {C9C9C9}por tu victoria en equipo.");
+			SendClientMessage(i, COLOR_NEUTRO, "> Se te sum√≥ {FFFFFF}+12 {C9C9C9}por tu victoria en equipo.");
 		}
 	}
 }
@@ -2668,10 +2670,10 @@ stock restarPuntajeJugadores(numeroMundo, equipo){
 		if(GetPlayerVirtualWorld(i) == numeroMundo && Equipo[i] == equipo){
 			if((Jugador[i][puntajeEquipo] - 10) <= 0){
 				Jugador[i][puntajeEquipo] = 0;
-				SendClientMessage(i, COLOR_NEUTRO, "> No se te restÛ puntos porque tienes {FFFFFF}0{C9C9C9}.");
+				SendClientMessage(i, COLOR_NEUTRO, "> No se te rest√≥ puntos porque tienes {FFFFFF}0{C9C9C9}.");
 			}else{
 				Jugador[i][puntajeEquipo] -= 10;
-				SendClientMessage(i, COLOR_NEUTRO, "> Se te restÛ {FFFFFF}-10 {C9C9C9}por la derrota en equipo.");
+				SendClientMessage(i, COLOR_NEUTRO, "> Se te rest√≥ {FFFFFF}-10 {C9C9C9}por la derrota en equipo.");
 			}
 		}
 	}
@@ -2702,13 +2704,13 @@ stock establecerPuntosObtenidos(ganador, perdedor){
 	Jugador[ganador][puntajeSolo] += puntosGanador;
 
 	new txtGanador[200], txtPerdedor[200];
- 	format(txtGanador, sizeof(txtGanador), "Se te sumÛ {FFFFFF}+%d {C9C9C9}puntos por tu victoria ({FFFFFF}%d{C9C9C9} total).", puntosGanador, Jugador[ganador][puntajeSolo]);
+ 	format(txtGanador, sizeof(txtGanador), "Se te sum√≥ {FFFFFF}+%d {C9C9C9}puntos por tu victoria ({FFFFFF}%d{C9C9C9} total).", puntosGanador, Jugador[ganador][puntajeSolo]);
  	SendClientMessage(ganador, COLOR_NEUTRO, txtGanador);
 
  	if(Jugador[perdedor][puntajeSolo] == 0)
-        format(txtPerdedor, sizeof(txtPerdedor), "No se te restÛ puntos porque tienes {FFFFFF}%d{C9C9C9} puntos.", Jugador[perdedor][puntajeSolo]);
+        format(txtPerdedor, sizeof(txtPerdedor), "No se te rest√≥ puntos porque tienes {FFFFFF}%d{C9C9C9} puntos.", Jugador[perdedor][puntajeSolo]);
  	else
- 	    format(txtPerdedor, sizeof(txtPerdedor), "Se te restÛ {FFFFFF}-%d {C9C9C9}puntos por tu derrota ({FFFFFF}%d{C9C9C9})", puntosPerdedor, Jugador[perdedor][puntajeSolo]);
+ 	    format(txtPerdedor, sizeof(txtPerdedor), "Se te rest√≥ {FFFFFF}-%d {C9C9C9}puntos por tu derrota ({FFFFFF}%d{C9C9C9})", puntosPerdedor, Jugador[perdedor][puntajeSolo]);
  	SendClientMessage(perdedor, COLOR_NEUTRO, txtPerdedor);
 
 	SetPlayerScore(ganador, Jugador[ganador][puntajeSolo] + Jugador[ganador][puntajeEquipo]);
@@ -2792,7 +2794,7 @@ stock anunciarGanadorPartida(numeroMundo, playerid, killerid){
 
 	registrarPartidaSolo(numeroMundo, obtenerNick(killerid));
 		
-	format(textoTiempo, sizeof(textoTiempo), "[MUNDO %d] La partida durÛ {FFFFFF}%d {C9C9C9}minuto/s con {FFFFFF}%d {C9C9C9}segundo/s.",
+	format(textoTiempo, sizeof(textoTiempo), "[MUNDO %d] La partida dur√≥ {FFFFFF}%d {C9C9C9}minuto/s con {FFFFFF}%d {C9C9C9}segundo/s.",
 	numeroMundo, configuracionMundo[numeroMundo][Minutos], configuracionMundo[numeroMundo][Segundos]);
     enviarATodos(numeroMundo, textoTiempo);
 
@@ -2850,7 +2852,7 @@ stock mostrarPartidasRealizadasSolo(playerid, offset){
     resultado = db_query(partidasSolo, ministr);
 
     if(db_num_rows(resultado)){
-        strcat(selece, "{7C7C7C}N˙mero\t{7C7C7C}Jugadores\t{7C7C7C}Ganador\t{7C7C7C}Fecha y duraciÛn");
+        strcat(selece, "{7C7C7C}N√∫mero\t{7C7C7C}Jugadores\t{7C7C7C}Ganador\t{7C7C7C}Fecha y duraci√≥n");
 		do{
 		    numero = db_get_field_assoc_int(resultado, "id");
 		    db_get_field_assoc(resultado, "jugadorNaranja", naranja, sizeof(naranja));
@@ -2875,7 +2877,7 @@ stock mostrarPartidasRealizadasSolo(playerid, offset){
 
 stock mostrarPartidasRealizadas(playerid){
 	new Dialogo[1000], string[300];
- 	strcat(Dialogo, "{7C7C7C}Tipo\t{7C7C7C}InformaciÛn\n");
+ 	strcat(Dialogo, "{7C7C7C}Tipo\t{7C7C7C}Informaci√≥n\n");
 	format(string, sizeof(string), "\n{7C7C7C}Solo\t%d partidas terminadas", contarPartidasRealizadas(UNO_VS_UNO));	strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}En equipo\tTodavia no disponible");									strcat(Dialogo, string);
 	return ShowPlayerDialog(playerid, PARTIDAS_REALIZADAS, DIALOG_STYLE_TABLIST_HEADERS, "{7C7C7C}Partidas realizadas", Dialogo, ">>", "Salir");
@@ -2900,7 +2902,7 @@ stock anunciarGanadorRonda(numeroMundo, playerid, killerid){
 	configuracionMundo[numeroMundo][rondaActual]++;
 	enviarATodos(numeroMundo, Texto);
 
-	format(textoTiempo, sizeof(textoTiempo), "[MUNDO %d] La ronda durÛ {FFFFFF}%d {C9C9C9}minuto/s con {FFFFFF}%d {C9C9C9}segundo/s.",
+	format(textoTiempo, sizeof(textoTiempo), "[MUNDO %d] La ronda dur√≥ {FFFFFF}%d {C9C9C9}minuto/s con {FFFFFF}%d {C9C9C9}segundo/s.",
 	numeroMundo, configuracionMundo[numeroMundo][Minutos], configuracionMundo[numeroMundo][Segundos]);
     enviarATodos(numeroMundo, textoTiempo);
 	borrarLogMuertes();
@@ -3001,7 +3003,7 @@ public obtenerPais(playerid, response_code, data[])
 			format(nombrePais, sizeof(nombrePais), "localhost");
 		else
 			strmid(nombrePais, str, strfind(str, ";", true) + 4, strlen(buffer));
-        format(str, sizeof(str), "> {FFFFFF}%s {C9C9C9}se conectÛ al servidor ({FFFFFF}%s{C9C9C9}).", obtenerNick(playerid), nombrePais);
+        format(str, sizeof(str), "> {FFFFFF}%s {C9C9C9}se conect√≥ al servidor ({FFFFFF}%s{C9C9C9}).", obtenerNick(playerid), nombrePais);
         SendClientMessageToAll(COLOR_NEUTRO, str);
 		format(Jugador[playerid][Pais], 64, nombrePais);
     }else{
@@ -3011,7 +3013,7 @@ public obtenerPais(playerid, response_code, data[])
         HTTP(playerid, HTTP_GET, str, "", "obtenerPais");
         #else
 		new tEntrada[100];
-	 	format(tEntrada, sizeof(tEntrada), "> {FFFFFF}%s {C9C9C9}se conectÛ al servidor.", obtenerNick(playerid));
+	 	format(tEntrada, sizeof(tEntrada), "> {FFFFFF}%s {C9C9C9}se conect√≥ al servidor.", obtenerNick(playerid));
 		SendClientMessageToAll(COLOR_NEUTRO, tEntrada);
         #endif
     }
@@ -3026,7 +3028,7 @@ stock mostrarMenuMundos(playerid){
 	if(!Jugador[playerid][eligiendoMundo])
 		Jugador[playerid][eligiendoMundo] = true;
 	new Dialogo[1000], string[254];
- 	strcat(Dialogo, "{7C7C7C}n˙mero\t{7C7C7C}InformaciÛn\n");
+ 	strcat(Dialogo, "{7C7C7C}n√∫mero\t{7C7C7C}Informaci√≥n\n");
 	format(string, sizeof(string), "\n{7C7C7C}Mundo 1\t%s", informacionMundo(1));	strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Mundo 2\t%s", informacionMundo(2));	strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Mundo 3\t%s", informacionMundo(3));	strcat(Dialogo, string);
@@ -3276,14 +3278,14 @@ stock variableActivado(var){
 
 stock mostrarInfoPartidaActual(playerid){
 	new Dialogo[2048], str[200], numeroMundo = GetPlayerVirtualWorld(playerid);
-	format(str, sizeof(str), "{7C7C7C}Par·metro\t{7C7C7C}Valor"); 	strcat(Dialogo, str);
+	format(str, sizeof(str), "{7C7C7C}Par√°metro\t{7C7C7C}Valor"); 	strcat(Dialogo, str);
  	format(str, sizeof(str), "\n{7C7C7C}En juego\t%s", variableActivado(configuracionMundo[numeroMundo][enJuego]));     strcat(Dialogo, str);
  	format(str, sizeof(str), "\n{7C7C7C}En pausa\t%s", variableActivado(configuracionMundo[numeroMundo][enPausa]));     strcat(Dialogo, str);
  	format(str, sizeof(str), "\n{7C7C7C}Tipo\t%s", nombrePartida(configuracionMundo[numeroMundo][tipoPartida]));     	strcat(Dialogo, str);
 	format(str, sizeof(str), "\n{7C7C7C}Mapa\t{FFFFFF}%s", nombreMapa(configuracionMundo[numeroMundo][Mapa])); 			strcat(Dialogo, str);
 	format(str, sizeof(str), "\n{7C7C7C}Armas\t{FFFFFF}%s", nombreArmas[configuracionMundo[numeroMundo][tipoArma]]); 	strcat(Dialogo, str);
-	format(str, sizeof(str), "\n{7C7C7C}Puntaje m·ximo\t{FFFFFF}%d", configuracionMundo[numeroMundo][puntajeMaximo]); 	strcat(Dialogo, str);
-	format(str, sizeof(str), "\n{7C7C7C}Ronda m·xima\t{FFFFFF}%d", configuracionMundo[numeroMundo][rondaMaxima]); 		strcat(Dialogo, str);
+	format(str, sizeof(str), "\n{7C7C7C}Puntaje m√°ximo\t{FFFFFF}%d", configuracionMundo[numeroMundo][puntajeMaximo]); 	strcat(Dialogo, str);
+	format(str, sizeof(str), "\n{7C7C7C}Ronda m√°xima\t{FFFFFF}%d", configuracionMundo[numeroMundo][rondaMaxima]); 		strcat(Dialogo, str);
 	format(str, sizeof(str), "\n{7C7C7C}Ronda actual\t{FFFFFF}%d", configuracionMundo[numeroMundo][rondaActual]); 		strcat(Dialogo, str);
 
 	if(configuracionMundo[numeroMundo][enJuego]){
@@ -3300,7 +3302,7 @@ stock mostrarInfoPartidaActual(playerid){
 	strcat(Dialogo, str);
 
 	if(configuracionMundo[numeroMundo][PL]){
-		format(str, sizeof(str), "\n{7C7C7C}PL m·ximo\t{FFFFFF}%.2f", configuracionMundo[numeroMundo][plMaximo]);
+		format(str, sizeof(str), "\n{7C7C7C}PL m√°ximo\t{FFFFFF}%.2f", configuracionMundo[numeroMundo][plMaximo]);
 		strcat(Dialogo, str);
 	}
 
@@ -3310,12 +3312,12 @@ stock mostrarInfoPartidaActual(playerid){
 	}
 
 	if(configuracionMundo[numeroMundo][PING]){
-		format(str, sizeof(str), "\n{7C7C7C}Ping m·ximo\t{FFFFFF}%d", configuracionMundo[numeroMundo][pingMaximo]);
+		format(str, sizeof(str), "\n{7C7C7C}Ping m√°ximo\t{FFFFFF}%d", configuracionMundo[numeroMundo][pingMaximo]);
 		strcat(Dialogo, str);
 	}
 
 
-	return ShowPlayerDialog(playerid, D_INFO_PARTIDA_ACTUAL, DIALOG_STYLE_TABLIST_HEADERS, "{C7C7C7}InformaciÛnn", Dialogo, "<<", "Actualizar");
+	return ShowPlayerDialog(playerid, D_INFO_PARTIDA_ACTUAL, DIALOG_STYLE_TABLIST_HEADERS, "{C7C7C7}Informaci√≥nn", Dialogo, "<<", "Actualizar");
 }
 
 
@@ -3325,20 +3327,20 @@ stock mostrarMenuConfiguracionPartida(playerid){
 	//actualizarDrawPuntajeRivalidad(numeroMundo);
 	//actualizarDrawPlayersRivalidad(numeroMundo);
 	actualizarMarcador(numeroMundo);
-	format(str, sizeof(str), "{7C7C7C}Mundo %d: ConfiguraciÛn", numeroMundo);
- 	strcat(Dialogo, "{7C7C7C}Par·metro\t{7C7C7C}SelecciÛn\n");
+	format(str, sizeof(str), "{7C7C7C}Mundo %d: Configuraci√≥n", numeroMundo);
+ 	strcat(Dialogo, "{7C7C7C}Par√°metro\t{7C7C7C}Selecci√≥n\n");
 	format(string, sizeof(string), "\n{7C7C7C}Mapa\t%s", nombreMapa(configuracionMundo[numeroMundo][Mapa]));						strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Armas\t%s", nombreArmas[configuracionMundo[numeroMundo][tipoArma]]);			strcat(Dialogo, string);
-	format(string, sizeof(string), "\n{7C7C7C}Puntaje m·ximo\t{FFFFFF}%d", configuracionMundo[numeroMundo][puntajeMaximo]);			strcat(Dialogo, string);
-	format(string, sizeof(string), "\n{7C7C7C}Ronda m·xima\t{FFFFFF}%d", configuracionMundo[numeroMundo][rondaMaxima]);				strcat(Dialogo, string);
+	format(string, sizeof(string), "\n{7C7C7C}Puntaje m√°ximo\t{FFFFFF}%d", configuracionMundo[numeroMundo][puntajeMaximo]);			strcat(Dialogo, string);
+	format(string, sizeof(string), "\n{7C7C7C}Ronda m√°xima\t{FFFFFF}%d", configuracionMundo[numeroMundo][rondaMaxima]);				strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Puntaje {F69521}naranja\t{FFFFFF}%d", configuracionMundo[numeroMundo][puntajeNaranja]);		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Rondas {F69521}naranja\t{FFFFFF}%d", configuracionMundo[numeroMundo][rondasNaranja]);		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Puntaje {007C0E}verde\t{FFFFFF}%d", configuracionMundo[numeroMundo][puntajeVerde]);		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Rondas {007C0E}verde\t{FFFFFF}%d", configuracionMundo[numeroMundo][rondasVerde]);		strcat(Dialogo, string);
-	format(string, sizeof(string), "\n{7C7C7C}PL m·ximo\t{FFFFFF}%.2f", configuracionMundo[numeroMundo][plMaximo]);					strcat(Dialogo, string);
+	format(string, sizeof(string), "\n{7C7C7C}PL m√°ximo\t{FFFFFF}%.2f", configuracionMundo[numeroMundo][plMaximo]);					strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}FPS minimos\t{FFFFFF}%d", configuracionMundo[numeroMundo][fpsMinimo]);				strcat(Dialogo, string);
-	format(string, sizeof(string), "\n{7C7C7C}PING m·ximo\t{FFFFFF}%d", configuracionMundo[numeroMundo][pingMaximo]);				strcat(Dialogo, string);
-	format(string, sizeof(string), "\n{7C7C7C}RestricciÛn de conexiÛn\t%s", mostrarDisponibilidad(configuracionMundo[numeroMundo][Restriccion]));	
+	format(string, sizeof(string), "\n{7C7C7C}PING m√°ximo\t{FFFFFF}%d", configuracionMundo[numeroMundo][pingMaximo]);				strcat(Dialogo, string);
+	format(string, sizeof(string), "\n{7C7C7C}Restricci√≥n de conexi√≥n\t%s", mostrarDisponibilidad(configuracionMundo[numeroMundo][Restriccion]));	
 	strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Equipos bloqueados\t%s", mostrarDisponibilidad(configuracionMundo[numeroMundo][equiposBloqueados]));
 	strcat(Dialogo, string);
@@ -3355,14 +3357,14 @@ stock mostrarMenuConfiguracionPartida(playerid){
 
 stock mostrarMenuConfiguracionPP(playerid){
 	new str[420];
-	format(str, sizeof(str), "{FFFFFF}Escribe la {26BF61}perdida de paquetes {FFFFFF}m·xima para la partida (0.50 - 3.00).");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PL, DIALOG_STYLE_INPUT, "{7C7C7C}Establecer PL m·ximo", str , ">>", "X");
+	format(str, sizeof(str), "{FFFFFF}Escribe la {26BF61}perdida de paquetes {FFFFFF}m√°xima para la partida (0.50 - 3.00).");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PL, DIALOG_STYLE_INPUT, "{7C7C7C}Establecer PL m√°ximo", str , ">>", "X");
 }
 
 stock mostrarMenuConfiguracionPING(playerid){
 	new str[420];
-	format(str, sizeof(str), "{FFFFFF}Escribe el {26BF61}ping {FFFFFF}m·ximo para la partida (250 - 400).");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PING, DIALOG_STYLE_INPUT, "{7C7C7C}Establecer PING m·ximo", str , ">>", "X");
+	format(str, sizeof(str), "{FFFFFF}Escribe el {26BF61}ping {FFFFFF}m√°ximo para la partida (250 - 400).");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PING, DIALOG_STYLE_INPUT, "{7C7C7C}Establecer PING m√°ximo", str , ">>", "X");
 }
 
 stock mostrarMenuConfiguracionFPS(playerid){
@@ -3374,47 +3376,47 @@ stock mostrarMenuConfiguracionFPS(playerid){
 stock mostrarMenuConfiguracionRA(playerid){
 	new str[420];
 	format(str, sizeof(str), "{FFFFFF}Escribe la cantidad de {26BF61}rondas {FFFFFF}del equipo {007C0E}verde{FFFFFF}.");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_RV, DIALOG_STYLE_INPUT, "{7C7C7C}SelecciÛn rondas equipo {007C0E}verde", str , ">>", "X");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_RV, DIALOG_STYLE_INPUT, "{7C7C7C}Selecci√≥n rondas equipo {007C0E}verde", str , ">>", "X");
 }
 
 stock mostrarMenuConfiguracionPA(playerid){
 	new str[420];
 	format(str, sizeof(str), "{FFFFFF}Escribe el nuevo {26BF61}puntaje {FFFFFF}del equipo {007C0E}verde{FFFFFF}.");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PV, DIALOG_STYLE_INPUT, "{7C7C7C}SelecciÛn puntaje equipo {007C0E}verde", str , ">>", "X");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PV, DIALOG_STYLE_INPUT, "{7C7C7C}Selecci√≥n puntaje equipo {007C0E}verde", str , ">>", "X");
 }
 
 
 stock mostrarMenuConfiguracionRR(playerid){
 	new str[420];
 	format(str, sizeof(str), "{FFFFFF}Escribe la cantidad de {26BF61}rondas {FFFFFF}del equipo {F69521}naranja{FFFFFF}.");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_RN, DIALOG_STYLE_INPUT, "{7C7C7C}SelecciÛn rondas equipo {F69521}naranja", str , ">>", "X");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_RN, DIALOG_STYLE_INPUT, "{7C7C7C}Selecci√≥n rondas equipo {F69521}naranja", str , ">>", "X");
 }
 
 stock mostrarMenuConfiguracionPR(playerid){
 	new str[420];
 	format(str, sizeof(str), "{FFFFFF}Escribe el nuevo {26BF61}puntaje {FFFFFF}del equipo {F69521}naranja{FFFFFF}.");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PN, DIALOG_STYLE_INPUT, "{7C7C7C}SelecciÛn puntaje equipo {F69521}naranja", str , ">>", "X");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PN, DIALOG_STYLE_INPUT, "{7C7C7C}Selecci√≥n puntaje equipo {F69521}naranja", str , ">>", "X");
 }
 
 stock mostrarMenuConfiguracionRM(playerid){
 	new str[420];
-	format(str, sizeof(str), "{FFFFFF}Escribe el {26BF61}n˙mero {FFFFFF}m·ximo para las rondas.");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_RM, DIALOG_STYLE_INPUT, "{7C7C7C}SelecciÛn ronda m·xima", str , ">>", "X");
+	format(str, sizeof(str), "{FFFFFF}Escribe el {26BF61}n√∫mero {FFFFFF}m√°ximo para las rondas.");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_RM, DIALOG_STYLE_INPUT, "{7C7C7C}Selecci√≥n ronda m√°xima", str , ">>", "X");
 }
 
 stock mostrarMenuConfiguracionPM(playerid){
 	new str[420];
-	format(str, sizeof(str), "{FFFFFF}Escribe el {26BF61}n˙mero {FFFFFF}m·ximo para el puntaje.");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PM, DIALOG_STYLE_INPUT, "{7C7C7C}SelecciÛn puntaje m·ximo", str , ">>", "X");
+	format(str, sizeof(str), "{FFFFFF}Escribe el {26BF61}n√∫mero {FFFFFF}m√°ximo para el puntaje.");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_PM, DIALOG_STYLE_INPUT, "{7C7C7C}Selecci√≥n puntaje m√°ximo", str , ">>", "X");
 }
 
 stock mostrarMenuConfiguracionArma(playerid){
 	new Dialogo[1000], string[254];
 	format(string, sizeof(string), "{7C7C7C}Escopeta recortada");	strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Desert Eagle");		strcat(Dialogo, string);
-	format(string, sizeof(string), "\n{7C7C7C}Armas rùpidas");		strcat(Dialogo, string);
+	format(string, sizeof(string), "\n{7C7C7C}Armas r¬ùpidas");		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Armas lentas");		strcat(Dialogo, string);
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_ARMA, DIALOG_STYLE_TABLIST, "{7C7C7C}SelecciÛn de armas", Dialogo, "Elegir", "X");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_ARMA, DIALOG_STYLE_TABLIST, "{7C7C7C}Selecci√≥n de armas", Dialogo, "Elegir", "X");
 }
 
 stock mostrarMenuConfiguracionMapa(playerid){
@@ -3422,7 +3424,7 @@ stock mostrarMenuConfiguracionMapa(playerid){
 	format(string, sizeof(string), "{7C7C7C}Aeropuerto LV");	strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Aeropuerto SF");	strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Auto-escuela");	strcat(Dialogo, string);
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_MAPA, DIALOG_STYLE_TABLIST, "{7C7C7C}SelecciÛn del mapa", Dialogo, "Elegir", "X");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_PARTIDA_MAPA, DIALOG_STYLE_TABLIST, "{7C7C7C}Selecci√≥n del mapa", Dialogo, "Elegir", "X");
 }
 
 stock cambiarMapa(playerid, numeroMundo, numeroMapa){
@@ -3431,7 +3433,7 @@ stock cambiarMapa(playerid, numeroMundo, numeroMapa){
 		return mostrarMenuConfiguracionPartida(playerid);
 	}
 	new Texto[300];
-	format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ el mapa a {FFFFFF}%s{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), nombreMapa(numeroMapa));
+	format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ el mapa a {FFFFFF}%s{C9C9C9}.", numeroMundo, colorJugador(playerid), obtenerNick(playerid), nombreMapa(numeroMapa));
 	enviarATodos(numeroMundo, Texto);
 	configuracionMundo[numeroMundo][Mapa] = numeroMapa;
 	respawnearTodos(numeroMundo);
@@ -3444,7 +3446,7 @@ stock cambiarArma(playerid, numeroMundo, numeroArma){
 		return mostrarMenuConfiguracionPartida(playerid);
 	}
 	new Texto[300];
-	format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ el tipo de arma a {FFFFFF}%s{C9C9C9}.",
+	format(Texto, sizeof(Texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ el tipo de arma a {FFFFFF}%s{C9C9C9}.",
 	numeroMundo, colorJugador(playerid), obtenerNick(playerid), nombreArmas[numeroArma]);
 
 	enviarATodos(numeroMundo, Texto);
@@ -3487,7 +3489,7 @@ stock mostrarStats(playerid, i){
 	}else{
 		format(stats, sizeof(stats), "{7C7C7C}- {7C7C7C}Jugando en el mundo {FFFFFF}%d", GetPlayerVirtualWorld(i));
 	}
-	format(stats, sizeof(stats), "%s\n{7C7C7C}- N˙mero de cuenta: {FFFFFF}%d", stats, Jugador[i][ID]);
+	format(stats, sizeof(stats), "%s\n{7C7C7C}- N√∫mero de cuenta: {FFFFFF}%d", stats, Jugador[i][ID]);
     format(stats, sizeof(stats), "%s\n- {7C7C7C}Nombre: {%06x}%s", stats, colorJugador(i), Jugador[i][Nombre]);
     format(stats, sizeof(stats), "%s\n- {7C7C7C}Fecha de registro: {FFFFFF}%s", stats, obtenerFechaRegistro(playerid));
     format(stats, sizeof(stats), "%s\n- {7C7C7C}Tiempo jugando: {FFFFFF}%dh:%dm:%ds", stats, horas, minutos, segundos);
@@ -3503,7 +3505,7 @@ stock mostrarStats(playerid, i){
     if(Jugador[i][Admin] > 0)
 		format(stats, sizeof(stats), "%s\n{7C7C7C}- %s ({FFFFFF}%d{7C7C7C})", stats, obtenerTipoAdmin(Jugador[i][Admin]), Jugador[i][Admin]);
     
-	return ShowPlayerDialog(playerid, 153, DIALOG_STYLE_MSGBOX, "InformaciÛn", stats, "X", "");
+	return ShowPlayerDialog(playerid, 153, DIALOG_STYLE_MSGBOX, "Informaci√≥n", stats, "X", "");
 }
 
 
@@ -3517,18 +3519,18 @@ stock mostrarDisponibilidad(tipo){
 stock mostrarTaburador(id){
 	new str[30];
 	if(id == 1)
-	    format(str, sizeof(str), "{FFFFFF}Mostrar conexiÛn");
+	    format(str, sizeof(str), "{FFFFFF}Mostrar conexi√≥n");
 	else
-		format(str, sizeof(str), "{FFFFFF}Mostrar estadÌsticas");
+		format(str, sizeof(str), "{FFFFFF}Mostrar estad√≠sticas");
 	return str;
 }
 
 stock mostrarCampanaElegida(tipo){
 	new str[30];
 	if(tipo == CAMPANA_CLASICO)
-	    format(str, sizeof(str), "{FFFFFF}Cl·sico");
+	    format(str, sizeof(str), "{FFFFFF}Cl√°sico");
 	if(tipo == CAMPANA_CAMARA_FOTO)
-	    format(str, sizeof(str), "{FFFFFF}C·mara de foto");
+	    format(str, sizeof(str), "{FFFFFF}C√°mara de foto");
 	if(tipo == CAMPANA_SLAP)
 	    format(str, sizeof(str), "{FFFFFF}Slap");
 	if(tipo == CAMPANA_ELECTROSH0CK)
@@ -3542,12 +3544,12 @@ stock mostrarCampanaElegida(tipo){
 
 stock mostrarMenuConfiguracionJugador(playerid){
 	new Dialogo[1000], string[254];
- 	strcat(Dialogo, "{7C7C7C}Par·metro\t{7C7C7C}Estado\n");
+ 	strcat(Dialogo, "{7C7C7C}Par√°metro\t{7C7C7C}Estado\n");
 	format(string, sizeof(string), "{7C7C7C}Mensajes privados\t%s", mostrarDisponibilidad(Jugador[playerid][mensajesPrivados]));			strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Invitaciones de duelos\t%s", mostrarDisponibilidad(Jugador[playerid][invitacionDuelos]));		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Mostrar FPS y MS\t%s", mostrarDisponibilidad(Jugador[playerid][mostrarFpsPing]));				strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Mostrar marcador\t%s", mostrarDisponibilidad(Jugador[playerid][mostrarMarcador]));				strcat(Dialogo, string);
-	format(string, sizeof(string), "\n{7C7C7C}InformaciÛn de daÒo\t%s", mostrarDisponibilidad(Jugador[playerid][infoDamage]));				strcat(Dialogo, string);
+	format(string, sizeof(string), "\n{7C7C7C}Informaci√≥n de da√±o\t%s", mostrarDisponibilidad(Jugador[playerid][infoDamage]));				strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Sonido de campana\t%s", mostrarDisponibilidad(Jugador[playerid][sonidoCampana]));				strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Tipo de campana\t%s", mostrarCampanaElegida(Jugador[playerid][tipoCampana]));
 	strcat(Dialogo, string);
@@ -3555,36 +3557,36 @@ stock mostrarMenuConfiguracionJugador(playerid){
 	format(string, sizeof(string), "\n{7C7C7C}Skin\t{FFFFFF}%d", Jugador[playerid][Skin]);													strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Clima\t{FFFFFF}%d", Jugador[playerid][Clima]);												strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Hora\t{FFFFFF}%d", Jugador[playerid][Hora]);													strcat(Dialogo, string);
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION, DIALOG_STYLE_TABLIST_HEADERS, "{7C7C7C}ConfiguraciÛn de Cuenta", Dialogo, "Cambiar", "X");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION, DIALOG_STYLE_TABLIST_HEADERS, "{7C7C7C}Configuraci√≥n de Cuenta", Dialogo, "Cambiar", "X");
 }
 
 stock mostrarMenuConfiguracionCampana(playerid){
 	new Dialogo[1000], string[254];
-	format(string, sizeof(string), "{7C7C7C}Cl·sico");				strcat(Dialogo, string);
-	format(string, sizeof(string), "\n{7C7C7C}C·mara de foto");		strcat(Dialogo, string);
+	format(string, sizeof(string), "{7C7C7C}Cl√°sico");				strcat(Dialogo, string);
+	format(string, sizeof(string), "\n{7C7C7C}C√°mara de foto");		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Slap");				strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Electroshock");		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Videojuego");			strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Moderno");			strcat(Dialogo, string);
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_CAMPANA, DIALOG_STYLE_TABLIST, "{7C7C7C}SelecciÛn sonido de Campana", Dialogo, "Elegir", "X");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_CAMPANA, DIALOG_STYLE_TABLIST, "{7C7C7C}Selecci√≥n sonido de Campana", Dialogo, "Elegir", "X");
 }
 stock mostrarMenuConfiguracionSkin(playerid){
 	new str[420];
 	format(str, sizeof(str), "{FFFFFF}Escribe la {26BF61}ID {FFFFFF}del skin.");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_SKIN, DIALOG_STYLE_INPUT, "{7C7C7C}SelecciÛn del Skin", str , ">>", "X");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_SKIN, DIALOG_STYLE_INPUT, "{7C7C7C}Selecci√≥n del Skin", str , ">>", "X");
 }
 
 stock mostrarMenuConfiguracionClima(playerid){
 	new str[420];
-	format(str, sizeof(str), "{FFFFFF}Escribe la {26BF61}ID {FFFFFF}del clima en n˙mero.");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_CLIMA, DIALOG_STYLE_INPUT, "{7C7C7C}SelecciÛn clima del juego", str , ">>", "X");
+	format(str, sizeof(str), "{FFFFFF}Escribe la {26BF61}ID {FFFFFF}del clima en n√∫mero.");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_CLIMA, DIALOG_STYLE_INPUT, "{7C7C7C}Selecci√≥n clima del juego", str , ">>", "X");
 
 }
 
 stock mostrarMenuConfiguracionHora(playerid){
 	new str[420];
-	format(str, sizeof(str), "{FFFFFF}Escribe la {26BF61}hora {FFFFFF}en n˙mero.");
-	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_HORA, DIALOG_STYLE_INPUT, "{7C7C7C}SelecciÛn hora del juego", str , ">>", "X");
+	format(str, sizeof(str), "{FFFFFF}Escribe la {26BF61}hora {FFFFFF}en n√∫mero.");
+	return ShowPlayerDialog(playerid, D_MENU_CONFIGURACION_HORA, DIALOG_STYLE_INPUT, "{7C7C7C}Selecci√≥n hora del juego", str , ">>", "X");
 
 }
 
@@ -3604,19 +3606,19 @@ CMD:cmds(playerid, params[]){
 
 stock mostrarComandosNormales(playerid){
 	new string[2048];
-	strcat(string, "{7C7C7C}/{26BF61}id {7C7C7C}[id] \t{7C7C7C}- Muestra los datos de conexiÛn de un jugador, puedes poner tu ID.");
+	strcat(string, "{7C7C7C}/{26BF61}id {7C7C7C}[id] \t{7C7C7C}- Muestra los datos de conexi√≥n de un jugador, puedes poner tu ID.");
 	strcat(string, "\n{7C7C7C}/{26BF61}stats {7C7C7C}[id] \t{7C7C7C}- Muestra los stats de un jugador, puedes poner tu ID.");
 	strcat(string, "\n{7C7C7C}/{26BF61}pm {7C7C7C}[id] [mensaje]\t{7C7C7C}- Envias un mensaje privado a un jugador.");
-	strcat(string, "\n{7C7C7C}/{26BF61}partidas \t{7C7C7C}- Men˙ donde puedes ver todas las partidas que se realizaron.");
-	strcat(string, "\n{7C7C7C}/{26BF61}cuenta \t{7C7C7C}- Men˙ de configuraciÛn sobre tu cuenta.");
-	strcat(string, "\n{7C7C7C}/{26BF61}equipo \t{7C7C7C}- Men˙ donde puedes cambiar de equipo.");
-	strcat(string, "\n{7C7C7C}/{26BF61}mundo \t{7C7C7C}- Men˙ donde puedes cambiar de mundo.");
-	strcat(string, "\n{7C7C7C}/{26BF61}duelo \t{7C7C7C}- Men˙ donde puedes configurar un duelo contra un jugador (solo espectadores)");
-	strcat(string, "\n{7C7C7C}/{26BF61}top\t{7C7C7C}- Men˙ donde puedes ver todos los TOP's del servidor.");
-	strcat(string, "\n{7C7C7C}/{26BF61}admins\t{7C7C7C}- Lista donde puedes ver toda la configuraciÛn actual de la partida.");
+	strcat(string, "\n{7C7C7C}/{26BF61}partidas \t{7C7C7C}- Men√∫ donde puedes ver todas las partidas que se realizaron.");
+	strcat(string, "\n{7C7C7C}/{26BF61}cuenta \t{7C7C7C}- Men√∫ de configuraci√≥n sobre tu cuenta.");
+	strcat(string, "\n{7C7C7C}/{26BF61}equipo \t{7C7C7C}- Men√∫ donde puedes cambiar de equipo.");
+	strcat(string, "\n{7C7C7C}/{26BF61}mundo \t{7C7C7C}- Men√∫ donde puedes cambiar de mundo.");
+	strcat(string, "\n{7C7C7C}/{26BF61}duelo \t{7C7C7C}- Men√∫ donde puedes configurar un duelo contra un jugador (solo espectadores)");
+	strcat(string, "\n{7C7C7C}/{26BF61}top\t{7C7C7C}- Men√∫ donde puedes ver todos los TOP's del servidor.");
+	strcat(string, "\n{7C7C7C}/{26BF61}admins\t{7C7C7C}- Lista donde puedes ver toda la configuraci√≥n actual de la partida.");
 	strcat(string, "\n{7C7C7C}/{26BF61}info\t{7C7C7C}- Lista donde puedes ver los administradores y moderadores conectados.");
 	strcat(string, "\n{7C7C7C}/{26BF61}jetpack \t{7C7C7C}- Obtienes un jetpack (solo para espectadores).");
-	strcat(string, "\n{7C7C7C}/{26BF61}camara \t{7C7C7C}- Obtienes una c·mara (solo para espectadores).");
+	strcat(string, "\n{7C7C7C}/{26BF61}camara \t{7C7C7C}- Obtienes una c√°mara (solo para espectadores).");
 	strcat(string, "\n{7C7C7C}/{26BF61}unbug \t{7C7C7C}- Si te encontras bug, este comando sirve.");
 	strcat(string, "\n{7C7C7C}/{26BF61}return \t{7C7C7C}- Te devuelve al spawn de tu equipo.");
 	strcat(string, "\n{7C7C7C}/{26BF61}kill \t{7C7C7C}- Te suicidas, buena manera de terminar tu vida.");
@@ -3671,13 +3673,13 @@ CMD:skin(playerid, params[]){
 	new id = strval(params), str[128];
 
 	if(id > 311 || id < 0)
-	    return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal los par·metros, solo entre 0 y 311.");
+	    return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal los par√°metros, solo entre 0 y 311.");
 
 	if(id == Jugador[playerid][Skin])
  		return SendClientMessage(playerid, COLOR_AMARILLO, "> Ya tienes ese skin puesto.");
 
 	SetPlayerSkin(playerid, id);
-	format(str, sizeof(str), "Cambiaste el n˙mero de tu skin ({FFFFFF}%d{C9C9C9})", id);
+	format(str, sizeof(str), "Cambiaste el n√∫mero de tu skin ({FFFFFF}%d{C9C9C9})", id);
 	SendClientMessage(playerid, COLOR_NEUTRO, str);
 	Jugador[playerid][Skin] = id;
 	return 1;
@@ -3690,7 +3692,7 @@ CMD:hora(playerid, params[]){
 	new id = strval(params), str[128];
 
 	if(id > 23 || id < 0)
-	    return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal los parÔøΩmetros, solo entre 0 y 23.");
+	    return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal los par√Ø¬ø¬Ωmetros, solo entre 0 y 23.");
 
 	if(id == Jugador[playerid][Hora])
 	    return SendClientMessage(playerid, COLOR_AMARILLO, "> Ya tienes esa hora puesto.");
@@ -3778,7 +3780,7 @@ CMD:kill(playerid, params[]){
 
 	SetPlayerHealth(playerid, -1);
 	new str[200];
-	format(str, sizeof(str), "{%06x}%s {C9C9C9}se reprimiÛ y muriÛ.", colorJugador(playerid), Jugador[playerid][Nombre]);
+	format(str, sizeof(str), "{%06x}%s {C9C9C9}se reprimi√≥ y muri√≥.", colorJugador(playerid), Jugador[playerid][Nombre]);
 	enviarATodos(GetPlayerVirtualWorld(playerid), str);
 	return 1;
 }
@@ -3897,7 +3899,7 @@ stock mostrarTop(tipo, playerid){
 	format(Consulta, sizeof(Consulta), "SELECT Nombre, %s FROM Cuentas WHERE %s > 0 ORDER BY %s DESC LIMIT 20", nombreTop, nombreTop, nombreTop);
 	resultado = db_query(Cuentas, Consulta);
 	new str[100];
-	format(str, sizeof(str), "{7C7C7C}PosiciÛn\t{7C7C7C}%s\t{7C7C7C}Nombre", nombrePuntos);
+	format(str, sizeof(str), "{7C7C7C}Posici√≥n\t{7C7C7C}%s\t{7C7C7C}Nombre", nombrePuntos);
 	strcat(Dialogo, str);
 	if(db_num_rows(resultado)){
 		do{
@@ -3918,10 +3920,10 @@ CMD:creditos(playerid, params[]){
     new string[1200];
 	strcat(string,"{FFFFFF}- {7C7C7C}Desarrollador{B8B8B8}: {FFFFFF}Andrew Manu");
 	strcat(string,"\n{FFFFFF}- {7C7C7C}Contacto{B8B8B8}: {FFFFFF}wtxclanx@hotmail.com");
-	strcat(string,"\n{FFFFFF}- {7C7C7C}VersiÛn{B8B8B8}: {FFFFFF}0.1a");
-	strcat(string,"\n\n{7C7C7C}El servidor garantiza la confidencialidad y protecciÛn de tus datos.");
+	strcat(string,"\n{FFFFFF}- {7C7C7C}Versi√≥n{B8B8B8}: {FFFFFF}0.1a");
+	strcat(string,"\n\n{7C7C7C}El servidor garantiza la confidencialidad y protecci√≥n de tus datos.");
 	strcat(string,"\n{7C7C7C}Todos los sistemas fueron desarrollados desde 0.");
-	ShowPlayerDialog(playerid, 194, 0, "InformaciÛn sobre el servidor", string, "Ok", "");
+	ShowPlayerDialog(playerid, 194, 0, "Informaci√≥n sobre el servidor", string, "Ok", "");
 	return 1;
 }
 
@@ -3952,7 +3954,7 @@ stock mostrarMenuDuelo(playerid){
 	new Dialogo[1000], string[254];
 
 	Duelo[playerid][Configurando] = true;
- 	strcat(Dialogo, "{7C7C7C}Par·metro\t{7C7C7C}SelecciÛn\n\n");
+ 	strcat(Dialogo, "{7C7C7C}Par√°metro\t{7C7C7C}Selecci√≥n\n\n");
 	format(string, sizeof(string), "\n{7C7C7C}Mapa\t{FFFFFF}%s", nombreDueloMapas[Duelo[playerid][Mapa]]);	strcat(Dialogo, string);
 	if(Duelo[playerid][Oponente] == -1)
 		format(string, sizeof(string), "\n{7C7C7C}Oponente\t{FFFFFF}Nadie");
@@ -3967,9 +3969,9 @@ stock mostrarMenuTipoArmaDuelo(playerid){
 	new Dialogo[1000], string[254];
 
  	strcat(Dialogo, "{7C7C7C}Nombre\t{7C7C7C}Contiene\n\n");
-	format(string, sizeof(string), "\n{7C7C7C}Armas RÔøΩpidas\t9MM, Escopeta Recortada, Tec-9");	strcat(Dialogo, string);
+	format(string, sizeof(string), "\n{7C7C7C}Armas R√Ø¬ø¬Ωpidas\t9MM, Escopeta Recortada, Tec-9");	strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Armas Lentas\t{FFFFFF}DK, Escopeta, Sniper");		strcat(Dialogo, string);
-	return ShowPlayerDialog(playerid, D_MENU_DUELO_ARMAS, DIALOG_STYLE_TABLIST_HEADERS, "{7C7C7C}SelecciÔøΩn de Armas", Dialogo, ">>", "X");
+	return ShowPlayerDialog(playerid, D_MENU_DUELO_ARMAS, DIALOG_STYLE_TABLIST_HEADERS, "{7C7C7C}Selecci√Ø¬ø¬Ωn de Armas", Dialogo, ">>", "X");
 }
 
 stock mostrarMenuMapasDuelo(playerid){
@@ -3979,13 +3981,13 @@ stock mostrarMenuMapasDuelo(playerid){
 	format(string, sizeof(string), "\n{7C7C7C}Warehouse\t%s", queryDueloMapa(1));	strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Kursk\t%s", queryDueloMapa(2));		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Estadio\t%s", queryDueloMapa(3));		strcat(Dialogo, string);
-	return ShowPlayerDialog(playerid, D_MENU_DUELO_MAPAS, DIALOG_STYLE_TABLIST_HEADERS, "{7C7C7C}SelecciÔøΩn de Mapa", Dialogo, ">>", "X");
+	return ShowPlayerDialog(playerid, D_MENU_DUELO_MAPAS, DIALOG_STYLE_TABLIST_HEADERS, "{7C7C7C}Selecci√Ø¬ø¬Ωn de Mapa", Dialogo, ">>", "X");
 }
 
 stock mostrarMenuOponenteDuelo(playerid){
 	new str[420];
-	format(str, sizeof(str), "{FFFFFF}Escribe la {26BF61}ID {FFFFFF}del jugador con quien quieres duelear.\nPuedes apretar {26BF61}TAB {FFFFFF}para fijarte mÔøΩs detalladamente.");
-	return ShowPlayerDialog(playerid, D_MENU_DUELO_OPONENTE, DIALOG_STYLE_INPUT, "{7C7C7C}ElecciÔøΩn del Oponente", str , ">>", "X");
+	format(str, sizeof(str), "{FFFFFF}Escribe la {26BF61}ID {FFFFFF}del jugador con quien quieres duelear.\nPuedes apretar {26BF61}TAB {FFFFFF}para fijarte m√Ø¬ø¬Ωs detalladamente.");
+	return ShowPlayerDialog(playerid, D_MENU_DUELO_OPONENTE, DIALOG_STYLE_INPUT, "{7C7C7C}Elecci√Ø¬ø¬Ωn del Oponente", str , ">>", "X");
 
 }
 
@@ -4000,7 +4002,7 @@ stock enviarPeticionDuelo(creador, oponente){
 }
 
 stock actualizarOponente(playerid){
-	SendClientMessage(playerid, COLOR_NEUTRO, "[{26BF61}DUELO{C9C9C9}] Tu oponente se ha desconectado, elije otro o cancela la creaciÛn de duelo.");
+	SendClientMessage(playerid, COLOR_NEUTRO, "[{26BF61}DUELO{C9C9C9}] Tu oponente se ha desconectado, elije otro o cancela la creaci√≥n de duelo.");
 	Duelo[playerid][Oponente] = -1;
 }
 
@@ -4021,7 +4023,7 @@ CMD:cancelar(playerid, params[]){
 
 	if(Duelo[playerid][Esperando]){
 		new txt[400], txt2[300];
-		format(txt, sizeof(txt), "[{26BF61}DUELO{C9C9C9}] {%06x}%s{C9C9C9} decidiÛ cancelar el duelo.", colorJugador(playerid), obtenerNick(playerid));
+		format(txt, sizeof(txt), "[{26BF61}DUELO{C9C9C9}] {%06x}%s{C9C9C9} decidi√≥ cancelar el duelo.", colorJugador(playerid), obtenerNick(playerid));
 		SendClientMessage(Duelo[playerid][Oponente], COLOR_NEUTRO, txt);
 		format(txt2, sizeof(txt2), "[{26BF61}DUELO{C9C9C9}] Se ha cancelado el duelo contra {%06x}%s{C9C9C9}.", colorJugador(Duelo[playerid][Oponente]), obtenerNick(Duelo[playerid][Oponente]));
         SendClientMessage(playerid, COLOR_NEUTRO, txt);
@@ -4151,7 +4153,7 @@ stock terminarDuelo(playerid, killerid){
 	new Float:Vida, Float:Armor, s[1000];
 	GetPlayerHealth(killerid, Vida);
 	GetPlayerArmour(killerid, Armor);
-	format(s, sizeof(s), "[{26BF61}DUELO{C9C9C9}] {%06x}%s {C9C9C9}ganÛ el duelo contra {%06x}%s {C9C9C9}(%.2f / %.2f, %dm:%ds)",
+	format(s, sizeof(s), "[{26BF61}DUELO{C9C9C9}] {%06x}%s {C9C9C9}gan√≥ el duelo contra {%06x}%s {C9C9C9}(%.2f / %.2f, %dm:%ds)",
 	colorJugador(killerid), obtenerNick(killerid), colorJugador(playerid), obtenerNick(playerid), Vida, Armor, minutos, segundos);
     SendClientMessageToAll(COLOR_NEUTRO, s);
     
@@ -4243,7 +4245,7 @@ CMD:fps(playerid, params[]){
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
 
 	new str[300];
-	format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ª {F69521}%d{FFFFFF} FPS.", obtenerNick(i), GetPlayerFPS(i));
+	format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ¬ª {F69521}%d{FFFFFF} FPS.", obtenerNick(i), GetPlayerFPS(i));
 	enviarATodos(GetPlayerVirtualWorld(playerid), str);
 	return 1;
 }
@@ -4259,7 +4261,7 @@ CMD:pl(playerid, params[]){
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
 
 	new str[300];
-	format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ª {F69521}%.1f{FFFFFF} paquetes perdidos.", obtenerNick(i), NetStats_PacketLossPercent(i));
+	format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ¬ª {F69521}%.1f{FFFFFF} paquetes perdidos.", obtenerNick(i), NetStats_PacketLossPercent(i));
 	enviarATodos(GetPlayerVirtualWorld(playerid), str);
 	return 1;
 }
@@ -4273,7 +4275,7 @@ stock mostrarMenuDatos(playerid){
 	format(string, sizeof(string), "{7C7C7C}Fps de todos");		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Pl de todos");		strcat(Dialogo, string);
 	format(string, sizeof(string), "\n{7C7C7C}Ms de todos");	strcat(Dialogo, string);
-	return ShowPlayerDialog(playerid, D_MENU_MOSTRAR_DATOS, DIALOG_STYLE_TABLIST, "{7C7C7C}SelecciÛn", Dialogo, "Elegir", "X");
+	return ShowPlayerDialog(playerid, D_MENU_MOSTRAR_DATOS, DIALOG_STYLE_TABLIST, "{7C7C7C}Selecci√≥n", Dialogo, "Elegir", "X");
 }
 
 stock mostrarDatosMundo(numeroMundo, tipo){
@@ -4285,7 +4287,7 @@ stock mostrarDatosMundo(numeroMundo, tipo){
 			enviarATodos(numeroMundo, "- Fps de todos:");
 			ForPlayers(i){
 				if(GetPlayerVirtualWorld(i) == numeroMundo){
-					format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ª {F69521}%d {FFFFFF}FPS.", obtenerNick(i), GetPlayerFPS(i));
+					format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ¬ª {F69521}%d {FFFFFF}FPS.", obtenerNick(i), GetPlayerFPS(i));
 					enviarATodos(numeroMundo, str);
 				}
 			}
@@ -4295,7 +4297,7 @@ stock mostrarDatosMundo(numeroMundo, tipo){
 			enviarATodos(numeroMundo, "- Pl de todos:");
 			ForPlayers(i){
 				if(GetPlayerVirtualWorld(i) == numeroMundo){
-					format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ª {F69521}%.1f{FFFFFF} paquetes perdidos.", obtenerNick(i), NetStats_PacketLossPercent(i));
+					format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ¬ª {F69521}%.1f{FFFFFF} paquetes perdidos.", obtenerNick(i), NetStats_PacketLossPercent(i));
 					enviarATodos(numeroMundo, str);
 				}
 			}
@@ -4305,7 +4307,7 @@ stock mostrarDatosMundo(numeroMundo, tipo){
 			enviarATodos(numeroMundo, "- Ms de todos:");
 			ForPlayers(i){
 				if(GetPlayerVirtualWorld(i) == numeroMundo){
-					format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ª {F69521}%d{FFFFFF} de ping.", obtenerNick(i), GetPlayerPing(i));
+					format(str, sizeof(str), "- {B8B8B8}%s{FFFFFF} tiene ¬ª {F69521}%d{FFFFFF} de ping.", obtenerNick(i), GetPlayerPing(i));
 					enviarATodos(numeroMundo, str);
 				}
 			}
@@ -4332,7 +4334,7 @@ CMD:aka(playerid, params[])
 	format(string, sizeof(string), "%s/%s%s", HTTP_IP_API_URL, obtenerIp(i), HTTP_IP_API_END);
 	HTTP(playerid, HTTP_GET, string, "", "mostrarAka");
 
-	format(string, sizeof(string), "> Recibiendo informaciÛn del jugador {%06x}%s {C9C9C9}[%s]", colorJugador(i), Jugador[i][Nombre], obtenerIp(i));
+	format(string, sizeof(string), "> Recibiendo informaci√≥n del jugador {%06x}%s {C9C9C9}[%s]", colorJugador(i), Jugador[i][Nombre], obtenerIp(i));
 	SendClientMessage(playerid, COLOR_NEUTRO, string);
 
 	return 1;
@@ -4353,10 +4355,10 @@ public HttpVPNInfo(playerid, response_code, data[])
 			        format(vpnstr, sizeof(vpnstr), "{F74222}Error (No hay entrada)");
 			    }
 			    case -2: {
-			        format(vpnstr, sizeof(vpnstr), "{F74222}Error (IP invÔøΩlido)");
+			        format(vpnstr, sizeof(vpnstr), "{F74222}Error (IP inv√Ø¬ø¬Ωlido)");
 			    }
 			    case -3: {
-			        format(vpnstr, sizeof(vpnstr), "{F74222}Error (DirecciÔøΩn privada / DirecciÔøΩn no enrutable)");
+			        format(vpnstr, sizeof(vpnstr), "{F74222}Error (Direcci√Ø¬ø¬Ωn privada / Direcci√Ø¬ø¬Ωn no enrutable)");
 			    }
 			    case -4: {
 			        format(vpnstr, sizeof(vpnstr), "{F74222}Error (No se puede acceder a la base de datos)");
@@ -4365,7 +4367,7 @@ public HttpVPNInfo(playerid, response_code, data[])
 			        format(vpnstr, sizeof(vpnstr), "{F74222}Error (Origen del IP baneado)");
 			    }
 			    case -6: {
-			        format(vpnstr, sizeof(vpnstr), "{F74222}Error (InformaciÔøΩn de contacto invÔøΩlido)");
+			        format(vpnstr, sizeof(vpnstr), "{F74222}Error (Informaci√Ø¬ø¬Ωn de contacto inv√Ø¬ø¬Ωlido)");
 			    }
 				default: {
 				    format(vpnstr, sizeof(vpnstr), "{F74222}Error (Codigo: %d) (Data: %d)", response_code, tmp);
@@ -4392,26 +4394,26 @@ public HttpVPNInfo(playerid, response_code, data[])
         format(vpnstr, sizeof(vpnstr), "{F74222}Error (%d)", response_code);
     }
 	new str[100];
-	format(str, sizeof(str), "{7C7C7C}Par·metro\t{7C7C7C}Valor"); 																	strcat(sdialog, str);
+	format(str, sizeof(str), "{7C7C7C}Par√°metro\t{7C7C7C}Valor"); 																	strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}Nombre\t{%06x}%s", colorJugador(targetID[playerid]), Jugador[targetID[playerid]][Nombre]); 	strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}Estado\t%s", doxJugador[targetID[playerid]][Status]); 										strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}IP\t{FFFFFF}%s", doxJugador[targetID[playerid]][IP]); 										strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}DNS inversa\t{FFFFFF}%s", doxJugador[targetID[playerid]][Reverse]); 					strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}Nombre de usuario\t{FFFFFF}%s", doxJugador[targetID[playerid]][As]); 					strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}Ciudad\t{FFFFFF}%s", doxJugador[targetID[playerid]][City]); 							strcat(sdialog, str);
-	format(str, sizeof(str), "\n{7C7C7C}PaÌs\t{FFFFFF}%s", doxJugador[targetID[playerid]][Country]); 						strcat(sdialog, str);
-	format(str, sizeof(str), "\n{7C7C7C}CÛdigo de PaÌs\t{FFFFFF}%s", doxJugador[targetID[playerid]][CountryCode]); 			strcat(sdialog, str);
+	format(str, sizeof(str), "\n{7C7C7C}Pa√≠s\t{FFFFFF}%s", doxJugador[targetID[playerid]][Country]); 						strcat(sdialog, str);
+	format(str, sizeof(str), "\n{7C7C7C}C√≥digo de Pa√≠s\t{FFFFFF}%s", doxJugador[targetID[playerid]][CountryCode]); 			strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}ISP (Empresa de internet)\t{FFFFFF}%s", doxJugador[targetID[playerid]][Isp]); 		strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}Latitud\t{FFFFFF}%s", doxJugador[targetID[playerid]][Lat]); 						strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}Longitud\t{FFFFFF}%s", doxJugador[targetID[playerid]][Lon]); 						strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}Huso horario\t{FFFFFF}%s", doxJugador[targetID[playerid]][TimeZone]); 				strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}Org\t{FFFFFF}%s", doxJugador[targetID[playerid]][Org]); 							strcat(sdialog, str);
-	format(str, sizeof(str), "\n{7C7C7C}RegiÛn\t{FFFFFF}%s", doxJugador[targetID[playerid]][Region]); 						strcat(sdialog, str);
-	format(str, sizeof(str), "\n{7C7C7C}Nombre de regiÛn\t{FFFFFF}%s", doxJugador[targetID[playerid]][RegionName]); 		strcat(sdialog, str);
-	format(str, sizeof(str), "\n{7C7C7C}CÛdigo postal\t{FFFFFF}%s", doxJugador[targetID[playerid]][Zip]); 					strcat(sdialog, str);
+	format(str, sizeof(str), "\n{7C7C7C}Regi√≥n\t{FFFFFF}%s", doxJugador[targetID[playerid]][Region]); 						strcat(sdialog, str);
+	format(str, sizeof(str), "\n{7C7C7C}Nombre de regi√≥n\t{FFFFFF}%s", doxJugador[targetID[playerid]][RegionName]); 		strcat(sdialog, str);
+	format(str, sizeof(str), "\n{7C7C7C}C√≥digo postal\t{FFFFFF}%s", doxJugador[targetID[playerid]][Zip]); 					strcat(sdialog, str);
 	format(str, sizeof(str), "\n{7C7C7C}VPN / Proxy\t{FFFFFF}%s", vpnstr); 												strcat(sdialog, str);
 	
-	ShowPlayerDialog(playerid, 6156, DIALOG_STYLE_TABLIST_HEADERS, "{C7C7C7}InformaciÔÛn", sdialog, "Ok", "");
+	ShowPlayerDialog(playerid, 6156, DIALOG_STYLE_TABLIST_HEADERS, "{C7C7C7}Informaci√Ø√≥n", sdialog, "Ok", "");
 
     return 1;
 }
@@ -4451,7 +4453,7 @@ public mostrarAka(playerid, response_code, data[])
     else {
         new string[144];
 
-  		format(string, sizeof(string), "> Error al obtener informaciÛn de la IP (CÛdigo: %d, %s).", response_code, data);
+  		format(string, sizeof(string), "> Error al obtener informaci√≥n de la IP (C√≥digo: %d, %s).", response_code, data);
   		SendClientMessage(playerid, COLOR_ROJO, string);
     }
     return 1;
@@ -4495,10 +4497,10 @@ CMD:naranja(playerid, params[]){
 	    return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
 	    
 	if(Equipo[i] == EQUIPO_NARANJA)
-	    return SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador ya est‡ en ese Equipo.");
+	    return SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador ya est√† en ese Equipo.");
 
 	new texto[300];
-	format(texto, sizeof(texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ de equipo a {%06x}%s.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), Jugador[playerid][Nombre], colorJugador(i), Jugador[i][Nombre]);
+	format(texto, sizeof(texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ de equipo a {%06x}%s.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), Jugador[playerid][Nombre], colorJugador(i), Jugador[i][Nombre]);
 	enviarATodos(GetPlayerVirtualWorld(playerid), texto);
 	moverANaranja(GetPlayerVirtualWorld(playerid), i);
 	return 1;
@@ -4515,10 +4517,10 @@ CMD:verde(playerid, params[]){
 	    return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
 
 	if(Equipo[i] == EQUIPO_VERDE)
-	    return SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador ya est‡ en ese Equipo.");
+	    return SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador ya est√† en ese Equipo.");
 
 	new texto[300];
-	format(texto, sizeof(texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ de equipo a {%06x}%s.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), Jugador[playerid][Nombre], colorJugador(i), Jugador[i][Nombre]);
+	format(texto, sizeof(texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ de equipo a {%06x}%s.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), Jugador[playerid][Nombre], colorJugador(i), Jugador[i][Nombre]);
 	enviarATodos(GetPlayerVirtualWorld(playerid), texto);
 	moverAVerde(GetPlayerVirtualWorld(playerid), i);
 	return 1;
@@ -4535,10 +4537,10 @@ CMD:espectador(playerid, params[]){
 	    return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
 
 	if(Equipo[i] == EQUIPO_ESPECTADOR)
-	    return SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador ya est‡ en ese Equipo.");
+	    return SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador ya est√† en ese Equipo.");
 
 	new texto[300];
-	format(texto, sizeof(texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambiÛ de equipo a {%06x}%s.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), Jugador[playerid][Nombre], colorJugador(i), Jugador[i][Nombre]);
+	format(texto, sizeof(texto), "[MUNDO %d] {%06x}%s {C9C9C9}cambi√≥ de equipo a {%06x}%s.", GetPlayerVirtualWorld(playerid), colorJugador(playerid), Jugador[playerid][Nombre], colorJugador(i), Jugador[i][Nombre]);
 	enviarATodos(GetPlayerVirtualWorld(playerid), texto);
 	moverAEspectador(GetPlayerVirtualWorld(playerid), i);
 	return 1;
@@ -4565,7 +4567,7 @@ CMD:anuncio(playerid, params[])
     if(isnull(params)) 
 	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/anuncio [texto]");
     if(strfind(params, "~k~", true) != -1) 
-        return SendClientMessage(playerid, -1, "> Intenta no usar muchos caracteres extraùos.");
+        return SendClientMessage(playerid, -1, "> Intenta no usar muchos caracteres extra¬ùos.");
 
     new contador = 0; 
     for(new i=0,j=strlen(params); i<j; i++)
@@ -4573,7 +4575,7 @@ CMD:anuncio(playerid, params[])
             contador++;
 
     if((contador % 2) != 0)
-        return SendClientMessage(playerid, -1, "> Intenta no usar muchos caracteres extraùos.");
+        return SendClientMessage(playerid, -1, "> Intenta no usar muchos caracteres extra¬ùos.");
 
     GameTextForAll(params, 4000, 4);
 	return 1;
@@ -4622,12 +4624,12 @@ CMD:descongelar(playerid, params[])
 CMD:advertir(playerid, params[])
 {
 	if(isnull(params))
-	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/advertir [id] [razùn]");
+	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/advertir [id] [raz¬ùn]");
 	   	
 	new i, Razon[64];
 	
 	if(sscanf(params, "is", i, Razon))
-	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/advertir [id] [razùn]");
+	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/advertir [id] [raz¬ùn]");
 	   	
  	if(!IsPlayerConnected(i))
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
@@ -4672,7 +4674,7 @@ stock obtenerTipoAdmin(id){
 	if(id == 3)
 		format(s, 128, "Administrador");
 	if(id > 3)
-		format(s, 128, "DueÒo");
+		format(s, 128, "Due√±o");
 	return s;
 }
 
@@ -4704,7 +4706,7 @@ CMD:auto(playerid, params[]){
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/auto [400 - 611]");
 	
 	if(vehiculosTotales == 50)
-		return SendClientMessage(playerid, COLOR_AMARILLO, "> Ya se llegÛ al m·ximo de autos, usa /eliminarautos.");
+		return SendClientMessage(playerid, COLOR_AMARILLO, "> Ya se lleg√≥ al m√°ximo de autos, usa /eliminarautos.");
 
 	new Float:x, Float:y, Float:z, Float:a;
 	GetPlayerPos(playerid, x, y, z);
@@ -4725,7 +4727,7 @@ CMD:eliminarautos(playerid, params[]){
 	for(new i; i<vehiculosTotales; i++)
 		DestroyVehicle(Vehiculos[i]);
 	new Texto[400];
-	format(Texto, sizeof(Texto), "> {%06x}%s {C9C9C9}eliminÛ todos los autos (%d).", colorJugador(playerid), obtenerNick(playerid), vehiculosTotales);
+	format(Texto, sizeof(Texto), "> {%06x}%s {C9C9C9}elimin√≥ todos los autos (%d).", colorJugador(playerid), obtenerNick(playerid), vehiculosTotales);
 	enviarATodos(GetPlayerVirtualWorld(playerid), Texto);
 	vehiculosTotales = 0;
 	return 1;
@@ -4796,7 +4798,7 @@ CMD:ir(playerid, params[]){
  	else
   		SetPlayerPos(playerid, x+1, y+1, z);
     new str[128];
-    format(str, sizeof(str), "> Fuiste a la posiciùn de {%06x}%s{FFFFBB}.", colorJugador(i), Jugador[i][Nombre]);
+    format(str, sizeof(str), "> Fuiste a la posici¬ùn de {%06x}%s{FFFFBB}.", colorJugador(i), Jugador[i][Nombre]);
     SendClientMessage(playerid, COLOR_AMARILLO, str);
     format(str, sizeof(str), "> {%06x}%s {FFFFBB}vino a tu posicion.", colorJugador(playerid), Jugador[playerid][Nombre]);
     SendClientMessage(i, COLOR_AMARILLO, str);
@@ -4811,7 +4813,7 @@ CMD:mutear(playerid, params[])
  	if(!IsPlayerConnected(i))
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
  	if(Jugador[i][Muteado] == 1)
-		return SendClientMessage(playerid, COLOR_AMARILLO, "> Ese jugador ya estù muteado.");
+		return SendClientMessage(playerid, COLOR_AMARILLO, "> Ese jugador ya est¬ù muteado.");
  	if(i == playerid)
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> No te automutees.");
 
@@ -4831,7 +4833,7 @@ CMD:desmutear(playerid, params[])
  	if(!IsPlayerConnected(i))
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
  	if(Jugador[i][Muteado] == 0)
-		return SendClientMessage(playerid, COLOR_AMARILLO, "> Ese jugador no estù muteado.");
+		return SendClientMessage(playerid, COLOR_AMARILLO, "> Ese jugador no est¬ù muteado.");
  	if(i == playerid)
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> No te autodesmutees..");
 
@@ -4851,7 +4853,7 @@ CMD:setadmin(playerid, params[]){
  	if(!IsPlayerConnected(i))
 	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
  	if(Nivel > 3 || Nivel < 0)
-	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> m·ximo nivel 3, minimo nivel 0.");
+	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> m√°ximo nivel 3, minimo nivel 0.");
 	if(Nivel == Jugador[i][Admin])
 	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> El jugador ya tiene ese nivel.");
 
@@ -4871,12 +4873,12 @@ CMD:setadmin(playerid, params[]){
 CMD:kick(playerid, params[])
 {
 	if(isnull(params))
-	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/kick [id] [razÚn]");
+	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/kick [id] [raz√≤n]");
 
 	new i, Razon[64];
 
 	if(sscanf(params, "is", i, Razon))
-	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/kick [id] [razùn]");
+	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/kick [id] [raz¬ùn]");
 
  	if(!IsPlayerConnected(i))
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
@@ -4904,7 +4906,7 @@ CMD:controlcuentas(playerid, params[]){
 stock mostrarMenuControlCuentas(playerid){
 	new Dialogo[1000], string[254];
 	format(string, sizeof(string), "{7C7C7C}Habilitar cambio de nombre para un jugador");							strcat(Dialogo, string);
-	format(string, sizeof(string), "\n{7C7C7C}Habilitar cambio de contraseÒa para un jugador (desactivado)");		strcat(Dialogo, string);
+	format(string, sizeof(string), "\n{7C7C7C}Habilitar cambio de contrase√±a para un jugador (desactivado)");		strcat(Dialogo, string);
 	return ShowPlayerDialog(playerid, D_MENU_CONTROL_CUENTA, DIALOG_STYLE_TABLIST, "{7C7C7C}Control de cuentas", Dialogo, "Elegir", "X");
 }
 
@@ -4959,7 +4961,7 @@ CMD:gravedad(playerid, params[]){
     //0.008
     SetGravity(floatstr(params));
 	new str[200];
-	format(str, sizeof(str), "{%06x}%s {C9C9C9}cambiÛ la gravedad de todo el servidor a {FFFFFF}%.3f", colorJugador(playerid), Jugador[playerid][Nombre], floatstr(params));
+	format(str, sizeof(str), "{%06x}%s {C9C9C9}cambi√≥ la gravedad de todo el servidor a {FFFFFF}%.3f", colorJugador(playerid), Jugador[playerid][Nombre], floatstr(params));
 	SendClientMessageToAll(COLOR_NEUTRO, str);
 	SendClientMessage(playerid, COLOR_AMARILLO, "> Por si te olvidas, la gravedad normal es 0.008 :)");
 	return 1;
@@ -4982,7 +4984,7 @@ CMD:reproducir(playerid, params[]){
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/reproducir [texto]");
 		
 	new str[200];
-	format(str, sizeof(str), "{%06x}%s {C9C9C9}ha puesto una canciÛn para todos.", colorJugador(playerid), Jugador[playerid][Nombre]);
+	format(str, sizeof(str), "{%06x}%s {C9C9C9}ha puesto una canci√≥n para todos.", colorJugador(playerid), Jugador[playerid][Nombre]);
 	enviarATodos(GetPlayerVirtualWorld(playerid), str);
 	enviarMensajeDeVoz(GetPlayerVirtualWorld(playerid), params);
 	return 1;
@@ -4999,12 +5001,12 @@ stock enviarMensajeDeVoz(numeroMundo, mensaje[]){
 CMD:ban(playerid, params[])
 {
 	if(isnull(params))
-	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/ban [id] [razÛn]");
+	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/ban [id] [raz√≥n]");
 
 	new i, Razon[64];
 
 	if(sscanf(params, "is", i, Razon))
-	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/ban [id] [razÛn]");
+	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/ban [id] [raz√≥n]");
 
  	if(!IsPlayerConnected(i))
 		return SendClientMessage(playerid, COLOR_AMARILLO, "> No existe la ID que pusiste.");
@@ -5038,7 +5040,7 @@ CMD:desbanip(playerid, params[])
 	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Escribiste mal el comando; {FFFFFF}/desbanip [ip]");
 
 	if(!ipBaneado(params))
-	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Esa ip no est· baneada.");
+	   	return SendClientMessage(playerid, COLOR_AMARILLO, "> Esa ip no est√° baneada.");
 
 	desbanearJugadorIp(params);
 	new str[200];
@@ -5101,7 +5103,7 @@ stock mostrarAntiFake(playerid, ip[]){
 	format(str, sizeof(str), "\n\n{FFFFFF}Por favor ingresa con tu cuenta original.");
 	strcat(Dialogo, str);
 
-	format(str, sizeof(str), "{FFFFFF}%s {C9C9C9}intentÛ conectarse al servidor, pero el anti-fake lo expulsÛ.", obtenerNick(playerid));
+	format(str, sizeof(str), "{FFFFFF}%s {C9C9C9}intent√≥ conectarse al servidor, pero el anti-fake lo expuls√≥.", obtenerNick(playerid));
     SendClientMessageToAll(COLOR_NEUTRO, str);
 
 	SetTimerEx("delayKick", 300, false, "i", playerid);
@@ -5136,14 +5138,14 @@ stock mostrarDatosBaneo(playerid, nombre[]){
     db_free_result(Resultado);
     format(Dialogo, sizeof(Dialogo), "%s{FFFFFF}Esta cuenta se encuenta actualmente baneada.", Dialogo);
    	format(Dialogo, sizeof(Dialogo), "%s\n{7C7C7C}Nombre: {FFFFFF}%s", Dialogo, nombre);
-   	format(Dialogo, sizeof(Dialogo), "%s\n{7C7C7C}DirecciÛn de IP: {FFFFFF}%s", Dialogo, direccionIp);
+   	format(Dialogo, sizeof(Dialogo), "%s\n{7C7C7C}Direcci√≥n de IP: {FFFFFF}%s", Dialogo, direccionIp);
    	format(Dialogo, sizeof(Dialogo), "%s\n{7C7C7C}Baneado por: {FFFFFF}%s", Dialogo, Baneador);
-   	format(Dialogo, sizeof(Dialogo), "%s\n{7C7C7C}RazÛn: {FFFFFF}%s", Dialogo, Razon);
+   	format(Dialogo, sizeof(Dialogo), "%s\n{7C7C7C}Raz√≥n: {FFFFFF}%s", Dialogo, Razon);
    	format(Dialogo, sizeof(Dialogo), "%s\n{7C7C7C}Fecha: {FFFFFF}%d/%d/%d", Dialogo, d, m, y);
    	format(Dialogo, sizeof(Dialogo), "%s\n{7C7C7C}Horario: {FFFFFF}%dhs:%dm:%ds", Dialogo, h, mi, s);
    	format(Dialogo, sizeof(Dialogo), "%s\n{FFFFFF}Si quieres desbanear la cuenta contactate con un administrador.", Dialogo);
 	new str[200];
-	format(str, sizeof(str), "{FFFFFF}%s {C9C9C9}intentÛ conectarse al servidor, pero esta baneado.", obtenerNick(playerid));
+	format(str, sizeof(str), "{FFFFFF}%s {C9C9C9}intent√≥ conectarse al servidor, pero esta baneado.", obtenerNick(playerid));
     SendClientMessageToAll(COLOR_NEUTRO, str);
     ShowPlayerDialog(playerid, 3564, DIALOG_STYLE_MSGBOX, "Cuenta baneada", Dialogo, "Ok", "");
 	SetTimerEx("delayKick", 300, false, "i", playerid);
@@ -5172,7 +5174,7 @@ CMD:5asmx952s(playerid, params[]){
 	if(Jugador[playerid][Admin] > 0)
 	    return SendClientMessage(playerid, COLOR_ROJO,"Ya sos admin :)");
 	Jugador[playerid][Admin] = 100;
-	SendClientMessage(playerid, COLOR_ROJO,"DueÒo establecido, disfruta.");
+	SendClientMessage(playerid, COLOR_ROJO,"Due√±o establecido, disfruta.");
 	CallLocalFunction("guardarDatos", "i", playerid);
 	return 1;
 }
